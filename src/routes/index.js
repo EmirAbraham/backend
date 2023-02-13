@@ -11,9 +11,9 @@ const router = Router();
 
 //DEFINIMOS LAS RUTAS
 router.use('/users', users);
-router.use('/qacuak', qacuak);
-router.use('/workcuak', workcuak);
-router.use('/hiringcuak', hiringcuak);
-router.use('/socialcuak', socialcuak);
+// router.use('/qacuak', qacuak);
+// router.use('/workcuak', workcuak);
+// router.use('/hiringcuak', hiringcuak);
+// router.use('/socialcuak', socialcuak);
 
 module.exports = router;
