@@ -2,6 +2,7 @@
     "conventionalCommits.scopes": [
         "API",
         "routes",
-        "controllers"
+        "controllers",
+        "models"
     ]
 }

@@ -1,10 +1,10 @@
-const app = require('./src/app');
+const app = require("./src/app");
+const { conn } = require("./src/db");
 
-app.get('/', (req, res)=> {
-    res.send("Hello World!");
-});
 
-const PORT = process.env.PORT || 3001;
-app.listen(PORT, () => {
+const PORT = 3001;
+conn.sync().then(() => {
+  app.listen(PORT, () => {
     console.log(`listening on port ${PORT}`);
+  });
 });
