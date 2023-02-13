@@ -1,3 +1,5 @@
+const { Userdev } = require("../../db")
+
 const createUser = async (params) => {
     const user = await Userdev.findOrCreate({
         where: {
