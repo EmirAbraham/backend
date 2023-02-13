@@ -1,13 +1,9 @@
-const { Userdev } = require("../../db.js");
+const { getUsers } = require('./getUsers.js');
+const { getUserDetails } = require('./getUserDetails.js');
+const { createUser } = require('./createUser.js');
 
-const newUser = async (params) => {
-  const user = await Userdev.create({
-    name: params.name,
-    email: params.email,
-    nickName: params.nickName,
-    image: params.image,
-  });
-  return user;
-};
-
-module.exports = { newUser };
+module.exports = {
+    getUsers,
+    getUserDetails,
+    createUser
+}
