@@ -1,7 +1,7 @@
 const { DataTypes } = require('sequelize');
 
 module.exports = (sequelize) => {
-  sequelize.define('socialcoment', {
+  sequelize.define('socialcomment', {
     id: {
       type: DataTypes.UUID, // para generar un id aleatorio unico.
       defaultValue: DataTypes.UUIDV4,
@@ -9,15 +9,13 @@ module.exports = (sequelize) => {
       allowNull: false,
     },
     content: {
-      type: DataTypes.STRING,
+      type: DataTypes.TEXT(1500),
       allowNull: false,
     },
-    createInDb: {
-      type: DataTypes.BOOLEAN,
-      allowNull: false,
-      defaultValue: true
+    likes: {
+      type: DataTypes.INTEGER,
+      defaultValue: 0
     },
   },
   {timestamps:false});
-
 };

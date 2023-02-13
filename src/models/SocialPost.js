@@ -9,19 +9,16 @@ module.exports = (sequelize) => {
       allowNull: false,
     },
     title: {
-      type: DataTypes.STRING,
+      type: DataTypes.STRING(60),
       allowNull: false,
     },
     content: {
-      type: DataTypes.STRING,
+      type: DataTypes.TEXT(1500),
       allowNull: false,
     },
-    createInDb: {
-      type: DataTypes.BOOLEAN,
-      allowNull: false,
-      defaultValue: true
+    likes: {
+      type: DataTypes.INTEGER,
+      defaultValue: 0,
     },
-  },
-  {timestamps:false});
-
+  });
 };

@@ -21,17 +21,11 @@ module.exports = (sequelize) => {
       allowNull: false,
     },
     birthdate: {
-      type: DataTypes.STRING,
+      type: DataTypes.DATEONLY,
     },
     image: {
       type: DataTypes.STRING,
     },
-    createInDb: {
-      type: DataTypes.BOOLEAN,
-      allowNull: false,
-      defaultValue: true
-    },
   },
   {timestamps:false});
-
 };
