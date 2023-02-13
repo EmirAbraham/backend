@@ -1,7 +1,7 @@
 const { DataTypes } = require('sequelize');
 
 module.exports = (sequelize) => {
-  sequelize.define('user', {
+  sequelize.define('socialpost', {
     id: {
       type: DataTypes.UUID, // para generar un id aleatorio unico.
       defaultValue: DataTypes.UUIDV4,
