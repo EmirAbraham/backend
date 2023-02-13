@@ -1,6 +1,6 @@
 const express = require('express');
 const router = express.Router();
-const { SocialComment, SocialPost } = require('../../db'); // Importar modelos de Sequelize
+const { SocialComment, SocialPost } = require('../../db'); // Importar modelos
 
 router.post('/:id/comments', async (req, res) => {
   try {
