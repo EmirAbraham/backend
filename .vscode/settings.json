@@ -1,5 +1,8 @@
 {
     "conventionalCommits.scopes": [
-        "API"
+        "API",
+        "/controlers",
+        "/routes",
+        "/models"
     ]
 }
