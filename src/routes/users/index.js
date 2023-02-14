@@ -30,7 +30,7 @@ router.post("/", async (req, res) => {
   try {
     const user = await createUser(req.body);
     res.json(user);
-  } catch (e) {
+  } catch (error) {
     res.status(400).send(e.toString());
   }
 });
@@ -38,9 +38,9 @@ router.post("/", async (req, res) => {
 router.delete("/:id", async (req, res) => {
   try {
     const { id } = req.params;
-    await deleteUser(id, req.body);
+    await deleteUser(id);
     res.json("Usuario eliminado");
-  } catch (e) {
+  } catch (error) {
     res.status(400).json({ error: error.message });
   }
 });
@@ -48,9 +48,9 @@ router.delete("/:id", async (req, res) => {
 router.put("/:id", async (req, res) => {
   try {
     const { id } = req.params;
-    await updateUser(id);
+    await updateUser(id, req.body);
     res.json("Actualización exitosa");
-  } catch (e) {
+  } catch (error) {
     res.status(400).json({ error: error.message });
   }
 });
