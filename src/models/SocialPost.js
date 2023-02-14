@@ -8,17 +8,17 @@ module.exports = (sequelize) => {
       primaryKey: true,
       allowNull: false,
     },
-    title: {
-      type: DataTypes.STRING(60),
-      allowNull: false,
-    },
     content: {
-      type: DataTypes.TEXT(1500),
+      type: DataTypes.STRING(1500),
       allowNull: false,
     },
     likes: {
       type: DataTypes.INTEGER,
       defaultValue: 0,
     },
+    active: {
+      type: DataTypes.BOOLEAN,
+      defaultValue: true,
+    }
   });
 };
