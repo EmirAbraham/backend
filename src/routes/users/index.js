@@ -1,6 +1,6 @@
 const { Router } = require('express');
 const router = Router();
-const { getUsers, getUserDetails, createUser } = require('../../controllers/users/index.js');
+const { getUsers, getUserDetails, createUser, deleteUser } = require('../../controllers/users/index.js');
 
 router.get('/', async (req, res) => {
     try {
@@ -27,8 +27,17 @@ router.post("/", async (req, res) => {
     res.json(user);
   } catch (e) {
     res.status(400).send(e.toString());
-    console.log(e);
   }
 });
+
+router.delete("/:id", async (req, res) => {
+  try {
+    const {id} = req.params
+    deleteUser(id)
+    res.json("Usuario eliminado")
+  } catch (e) {
+    res.status(400).json({error: error.message});
+  }
+})
 
 module.exports = router;
