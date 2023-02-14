@@ -9,12 +9,16 @@ module.exports = (sequelize) => {
       allowNull: false,
     },
     content: {
-      type: DataTypes.TEXT(1500),
+      type: DataTypes.STRING(1500),
       allowNull: false,
     },
     likes: {
       type: DataTypes.INTEGER,
       defaultValue: 0,
     },
+    active: {
+      type: DataTypes.BOOLEAN,
+      defaultValue: true,
+    }
   });
 };

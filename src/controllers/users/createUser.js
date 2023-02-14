@@ -1,17 +1,29 @@
 const { Userdev } = require("../../db")
 
 const createUser = async (params) => {
-    const user = await Userdev.findOrCreate({
+    
+    const { name, email, nickName, image, birthdate } = params;
+
+    const required = [ 'name', 'email', 'nickName' ];
+    for (const el of required) {
+        if(!params.hasOwnProperty(el)) throw new Error(`${el} is required`);
+    }
+
+    const [ user, created ] = await Userdev.findOrCreate({
         where: {
-            email: params.email
+            email,
         },
         defaults: {
-            name: params.name,
-            email: params.email,
-            nickName: params.nickName,
-            image: params.image,
+            name,
+            email,
+            nickName,
+            image,
+            birthdate,
         }
     });
+
+    if (!created) throw new Error(`User already exists`);
+
     return user;
 }
   
