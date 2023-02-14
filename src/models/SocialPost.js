@@ -8,10 +8,6 @@ module.exports = (sequelize) => {
       primaryKey: true,
       allowNull: false,
     },
-    title: {
-      type: DataTypes.STRING(60),
-      allowNull: false,
-    },
     content: {
       type: DataTypes.TEXT(1500),
       allowNull: false,
