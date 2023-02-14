@@ -8,14 +8,14 @@ const {
   updateUser,
 } = require("../../controllers/users/index.js");
 
-router.get('/', async (req, res) => {
-    try {
-        const result = await getUsers(req.query);
-        res.status(200).json(result);
-    } catch (error) {
-        res.status(400).json({error: error.message});
-    }
-
+router.get("/", async (req, res) => {
+  try {
+    const result = await getUsers(req.query);
+    res.status(200).json(result);
+  } catch (error) {
+    res.status(400).json({ error: error.message });
+  }
+});
 router.get("/:id", async (req, res) => {
   try {
     const { id } = req.params;
