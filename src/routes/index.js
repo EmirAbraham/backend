@@ -6,6 +6,7 @@ const qacuak = require('./qacuak/index.js');
 const workcuak = require('./workcuak/index.js');
 const hiringcuak = require('./hiringcuak/index.js');
 const socialcuak = require('./socialcuak/index.js');
+const comment = require('./socialcuak/comment.js');
 
 const router = Router();
 
@@ -15,5 +16,6 @@ router.use('/users', users);
 //router.use('/workcuak', workcuak);
 //router.use('/hiringcuak', hiringcuak);
 router.use('/socialcuak', socialcuak);
+router.use('/socialcuak', comment);
 
 module.exports = router;
