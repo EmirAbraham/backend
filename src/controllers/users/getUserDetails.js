@@ -1,9 +1,8 @@
 const { Userdev } = require('../../db.js');
 
-
 const getUserDetails = async (id) => {
     
-    const result = await Userdev.findByPK( id );
+    const result = await Userdev.findByPk( id );
 
     return result;
 }
