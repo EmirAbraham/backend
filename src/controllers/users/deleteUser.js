@@ -1,9 +1,9 @@
 const { Userdev } = require("../../db");
 
-const deleteUser = async (id, params) => {
+const deleteUser = async (id) => {
   await Userdev.update(
     {
-      active: params.active,
+      active: false,
     },
     {
       where: { id: id },

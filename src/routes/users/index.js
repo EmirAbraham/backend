@@ -48,7 +48,7 @@ router.delete("/:id", async (req, res) => {
 router.put("/:id", async (req, res) => {
   try {
     const { id } = req.params;
-    await updateUser(id, req.body);
+    await updateUser(id);
     res.json("Actualización exitosa");
   } catch (e) {
     res.status(400).json({ error: error.message });
