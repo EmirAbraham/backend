@@ -1,18 +1,22 @@
-const express = require('express');
-const router = express.Router();
-const { SocialComment, SocialPost } = require('../../db'); // Importar modelos
+const { Router } = require("express")
+const router = Router()
+const { Socialcomment, Socialpost } = require('../../db'); // Importar modelos
+const { getAllPosts } = require('../../controllers/socialcuak/posts/getAllPosts')
 
-router.post('/:id/comments', async (req, res) => {
+router.post('/:id/comment', async (req, res) => {
+  const id = req.params.id;
+  const allPosts = await getAllPosts();
+  const postId = await allPosts.find(post => post.id == (id));
+  const { content } = req.body;
   try {
-    const post = await SocialPost.findByPk(req.params.id);
-    if (!post) {
+    if(!postId) {
       return res.status(404).send('No se encontró el post');
     }
-
-    const { content } = req.body;
-    const newComment = await SocialComment.create({content})
-
-    res.send(newComment);
+    const newComment = await Socialcomment.create({
+      content, 
+      socialpostId: id,
+      })
+    res.status(200).send(newComment);
   } catch (error) {
     res.status(500).send(error);
   }
