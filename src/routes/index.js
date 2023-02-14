@@ -16,6 +16,6 @@ router.use('/users', users);
 //router.use('/workcuak', workcuak);
 //router.use('/hiringcuak', hiringcuak);
 router.use('/socialcuak', socialcuak);
-route.use('/socialcuak', comment);
+router.use('/socialcuak', comment);
 
 module.exports = router;
