@@ -1,9 +1,14 @@
 const { Userdev } = require("../../db");
 
 const deleteUser = async (id) => {
-  await Userdev.destroy({
-    where: { id: id },
-  });
+  await Userdev.update(
+    {
+      active: false,
+    },
+    {
+      where: { id: id },
+    }
+  );
 };
 
 module.exports = { deleteUser };

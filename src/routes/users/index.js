@@ -8,14 +8,14 @@ const {
   updateUser,
 } = require("../../controllers/users/index.js");
 
-router.get('/', async (req, res) => {
-    try {
-        const result = await getUsers(req.query);
-        res.status(200).json(result);
-    } catch (error) {
-        res.status(400).json({error: error.message});
-    }
-
+router.get("/", async (req, res) => {
+  try {
+    const result = await getUsers(req.query);
+    res.status(200).json(result);
+  } catch (error) {
+    res.status(400).json({ error: error.message });
+  }
+});
 router.get("/:id", async (req, res) => {
   try {
     const { id } = req.params;
@@ -38,7 +38,7 @@ router.post("/", async (req, res) => {
 router.delete("/:id", async (req, res) => {
   try {
     const { id } = req.params;
-    await deleteUser(id);
+    await deleteUser(id, req.body);
     res.json("Usuario eliminado");
   } catch (e) {
     res.status(400).json({ error: error.message });
@@ -48,7 +48,7 @@ router.delete("/:id", async (req, res) => {
 router.put("/:id", async (req, res) => {
   try {
     const { id } = req.params;
-    await updateUser(id, req.body);
+    await updateUser(id);
     res.json("Actualización exitosa");
   } catch (e) {
     res.status(400).json({ error: error.message });

@@ -8,7 +8,6 @@ const updateUser = async (id, params) => {
       nickName: params.nickName,
       birthdate: params.birthdate,
       image: params.image,
-      active: params.active,
     },
     {
       where: {
