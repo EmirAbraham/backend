@@ -38,7 +38,7 @@ router.post("/", async (req, res) => {
 router.delete("/:id", async (req, res) => {
   try {
     const { id } = req.params;
-    await deleteUser(id);
+    await deleteUser(id, req.body);
     res.json("Usuario eliminado");
   } catch (e) {
     res.status(400).json({ error: error.message });
