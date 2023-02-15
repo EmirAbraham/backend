@@ -32,10 +32,11 @@ const getUsers = async (params) => {
         attributes: [
             'id',
             'name',
+            'image',
+            /* // 'descriptionShort',
             'email',
             'nickName',
-            'birthdate',
-            'image',
+            'birthdate', */
         ]
     });
 

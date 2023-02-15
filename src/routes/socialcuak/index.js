@@ -47,6 +47,7 @@ router.put('/:id', async (req, res) => {
     const {content} = req.body;
     await updatePost(id, content);
     try {
+
         res.status(200).send('Posteo modificado exitosamente.')
     } catch (error) {
         res.status(404).send('El posteo no pudo ser modificado')
