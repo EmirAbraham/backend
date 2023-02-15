@@ -6,4 +6,4 @@ const getAllComments = async () => {
     return allComments
 }
 
-module.exports = {getAllComments}
+module.exports = { getAllComments }
