@@ -1,14 +1,14 @@
-const { Router } = require("express");
+const { Router } = require('express');
 const router = Router();
 const {
-  getUsers,
-  getUserDetails,
-  createUser,
-  deleteUser,
-  updateUser,
-} = require("../../controllers/users/index.js");
+    getUsers,
+    getUserDetails,
+    createUser,
+    deleteUser,
+    updateUser,
+} = require('../../controllers/users/index.js');
 
-router.get("/", async (req, res) => {
+router.get('/', async (req, res) => {
   try {
     const result = await getUsers(req.query);
     res.status(200).json(result);
@@ -16,7 +16,8 @@ router.get("/", async (req, res) => {
     res.status(400).json({ error: error.message });
   }
 });
-router.get("/:id", async (req, res) => {
+
+router.get('/:id', async (req, res) => {
   try {
     const { id } = req.params;
     const result = await getUserDetails(id);
@@ -26,16 +27,16 @@ router.get("/:id", async (req, res) => {
   }
 });
 
-router.post("/", async (req, res) => {
+router.post('/', async (req, res) => {
   try {
     const user = await createUser(req.body);
     res.json(user);
   } catch (error) {
-    res.status(400).send(e.toString());
+    res.status(400).json({ error: error.message });
   }
 });
 
-router.delete("/:id", async (req, res) => {
+router.delete('/:id', async (req, res) => {
   try {
     const { id } = req.params;
     await deleteUser(id);
@@ -45,7 +46,7 @@ router.delete("/:id", async (req, res) => {
   }
 });
 
-router.put("/:id", async (req, res) => {
+router.put('/:id', async (req, res) => {
   try {
     const { id } = req.params;
     await updateUser(id, req.body);

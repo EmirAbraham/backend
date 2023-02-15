@@ -10,6 +10,7 @@ const getUsers = async (params) => {
     let limit = 10;
     let offset = ((page ? page : 1) - 1) * limit;
     let url = `http://localhost:3001/users?`;
+    const currentPage = Number(page) || (offset / limit) + 1;
 
     if (name) {
         where.name = {[Op.iLike]: `%${name}%`}; 
@@ -42,8 +43,8 @@ const getUsers = async (params) => {
 
     const count = await Userdev.count({where});
     const pages = Math.ceil( await count / limit );
-    const next = offset+1 >= pages ? null : `${url}page=${(offset+2)}`;
-    const previus = !page || page === 1 ? null : `${url}page=${page-1}`;
+    const next = currentPage >= pages ? null : `${url}page=${currentPage+1}`;
+    const previus = currentPage <= 1 ? null : `${url}page=${currentPage-1}`;
 
     return {count, pages, previus, next, results};
 }
