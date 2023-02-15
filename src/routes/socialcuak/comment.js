@@ -1,7 +1,8 @@
 const { Router } = require("express")
 const router = Router()
 const { Socialcomment, Socialpost } = require('../../db'); // Importar modelos
-const { getAllPosts } = require('../../controllers/socialcuak/posts/getAllPosts')
+const { getAllPosts } = require('../../controllers/socialcuak/posts/getAllPosts');
+const { getAllComments } = require('../../controllers/socialcuak/comments/getAllComments');
 
 
 //RUTA POST DE COMENTARIOS
@@ -45,12 +46,15 @@ router.put('/:id/comment', async (req, res) => {
 
 // RUTA DELETE DE COMENTARIOS
 
-router.delete('/:id/comment', async (req, res)=> {
+router.delete('/:id/comment/:id', async (req, res)=> {
   const id = req.params.id;
   const allPosts = await getAllPosts();
+  const allComments = await getAllComments();
   try {
-      const deletePost = await allPosts.find(post => post.id == (id));
-      await deletePost.destroy();
+      const findPost = await allPosts.find(post => post.id == (id));
+      const deleteComment = await allComments.find(comment => comment.id == (id));
+      deleteComment.active = false;
+      await deleteComment.save();
       res.status(200).send('Comentario eliminado correctamente')
   } catch (error) {
       res.status(404).send('No se pudo eliminar el comentario')
