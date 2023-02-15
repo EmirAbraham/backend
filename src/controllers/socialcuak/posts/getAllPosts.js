@@ -1,4 +1,3 @@
-require('dotenv').config();
 const {Socialpost} = require('../../../db');
 
 const getAllPosts = async () => {
