@@ -8,7 +8,10 @@ const getUserDetails = async (id) => {
         },
         include: {
             model: Socialpost,
-        }
+            where: { active: true },
+            attributes: { exclude: ['active'] }
+        },
+        order: [[{ model: Socialpost }, 'createdAt', 'DESC']],
     } );
 
     return result;
