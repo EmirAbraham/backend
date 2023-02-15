@@ -51,4 +51,17 @@ router.delete('/:id/comment', async (req, res)=> {
   }
 });
 
+router.delete('/:id/comment/:id', async (req, res)=> {
+  const id = req.params.id;
+  const allComments = await getAllComments();
+  try {
+      const deleteComment = await allComments.find(comment => comment.id == (id));
+      deleteComment.active = false;
+      await deleteComment.save();
+      res.status(200).send('Comentario eliminado correctamente')
+  } catch (error) {
+      res.status(404).send('No se pudo eliminar el comentario')
+  }
+});
+
 module.exports = router;
