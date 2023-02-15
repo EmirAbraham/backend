@@ -31,12 +31,12 @@ router.get('/:id', async (req,res) => {
 // ruta POST de los posts
 
 router.post('/', async (req,res) => {
-    const {content} = req.body;
-    const newPost = await createPost(content)
+    const {content, userId} = req.body;
     try {
+        const newPost = await createPost(content, userId)
         res.status(200).send(newPost)
     } catch (error) {
-        res.status(404).send("Post no creado");
+        res.status(404).json({ error: error.message });
     }
 })
 
