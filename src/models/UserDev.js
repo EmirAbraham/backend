@@ -17,6 +17,10 @@ module.exports = (sequelize) => {
       unique: true,
       allowNull: false,
     },
+    password: {
+      type: DataTypes.STRING,
+      allowNull: false,
+    },
     nickName: {
       type: DataTypes.STRING,
       unique: true,
@@ -31,7 +35,16 @@ module.exports = (sequelize) => {
     active: {
       type: DataTypes.BOOLEAN,
       defaultValue: true,
-    }
+    },
+    description: {
+      type: DataTypes.STRING(120)
+    },
+    about: {
+      type: DataTypes.STRING(1500)
+    },
+    skills: {
+      type: DataTypes.ARRAY(DataTypes.STRING(20))
+    },
   },
   {timestamps:false});
 };
