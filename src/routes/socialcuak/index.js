@@ -1,14 +1,16 @@
-const {Router} = require('express');
+const { Router } = require('express');
 const router = Router();
-const {getAllPosts} = require('../../controllers/socialcuak/posts/getAllPosts')
-const {getPostById} = require('../../controllers/socialcuak/posts/getPostById')
-const {createPost} = require('../../controllers/socialcuak/posts/createPost')
-const {updatePost} = require('../../controllers/socialcuak/posts/updatePost')
-const {deletePost} = require('../../controllers/socialcuak/posts/deletePost')
+const { getAllPosts } = require('../../controllers/socialcuak/posts/getAllPosts')
+const { getPostById } = require('../../controllers/socialcuak/posts/getPostById')
+const { createPost } = require('../../controllers/socialcuak/posts/createPost')
+const { updatePost } = require('../../controllers/socialcuak/posts/updatePost')
+const { deletePost } = require('../../controllers/socialcuak/posts/deletePost')
+const { likePost } = require('../../controllers/socialcuak/posts/likePost')
+
 
 // rutas GET de los posts
 
-router.get('/', async (req,res)=> {
+router.get('/', async (req, res) => {
     const allPosts = await getAllPosts();
     try {
         res.status(200).send(allPosts);
@@ -17,7 +19,7 @@ router.get('/', async (req,res)=> {
     }
 })
 
-router.get('/:id', async (req,res) => {
+router.get('/:id', async (req, res) => {
     const id = req.params.id;
     const postById = await getPostById(id);
     try {
@@ -30,8 +32,8 @@ router.get('/:id', async (req,res) => {
 
 // ruta POST de los posts
 
-router.post('/', async (req,res) => {
-    const {content, userId} = req.body;
+router.post('/', async (req, res) => {
+    const { content, userId } = req.body;
     try {
         const newPost = await createPost(content, userId)
         res.status(200).send(newPost)
@@ -40,11 +42,21 @@ router.post('/', async (req,res) => {
     }
 })
 
+router.post('/:id/like', async (req, res) => {
+    const id = req.params.id;
+    try {
+        await likePost(id);
+        res.status(200).json({ message: 'Like agregado correctamente.' });
+    } catch (error) {
+        res.status(404).json({ message: 'Error al agregar el like.' });
+    }
+});
+
 // rutas PUT 
 
 router.put('/:id', async (req, res) => {
     const id = req.params.id;
-    const {content} = req.body;
+    const { content } = req.body;
     await updatePost(id, content);
     try {
 
@@ -56,7 +68,7 @@ router.put('/:id', async (req, res) => {
 
 // rutas DELETE
 
-router.delete('/:id', async (req, res)=> {
+router.delete('/:id', async (req, res) => {
     const id = req.params.id;
     await deletePost(id);
     try {
