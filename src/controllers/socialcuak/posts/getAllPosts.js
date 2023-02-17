@@ -2,6 +2,7 @@ const {Socialpost, Userdev, Socialcomment} = require('../../../db');
 
 const getAllPosts = async () => {
     const allPosts = await Socialpost.findAll({
+        where: {active: true},
         include:[
             {
                 model: Userdev,
