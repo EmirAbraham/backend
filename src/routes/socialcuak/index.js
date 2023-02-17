@@ -1,11 +1,18 @@
 const { Router } = require('express');
 const router = Router();
-const { getAllPosts } = require('../../controllers/socialcuak/posts/getAllPosts')
-const { getPostById } = require('../../controllers/socialcuak/posts/getPostById')
-const { createPost } = require('../../controllers/socialcuak/posts/createPost')
-const { updatePost } = require('../../controllers/socialcuak/posts/updatePost')
-const { deletePost } = require('../../controllers/socialcuak/posts/deletePost')
-const { likePost } = require('../../controllers/socialcuak/posts/likePost')
+
+// middlewares
+const { authorization } = require('../../middlewares/auth.js');
+const { check } = require('express-validator');
+
+// controllers
+const { 
+    getAllPosts, 
+    getPostById, 
+    createPost, 
+    updatePost, 
+    deletePost 
+} = require('../../controllers/socialcuak/posts/index.js');
 
 
 // rutas GET de los posts
@@ -31,11 +38,11 @@ router.get('/:id', async (req, res) => {
 
 
 // ruta POST de los posts
-
-router.post('/', async (req, res) => {
-    const { content, userId } = req.body;
+router.post('/', authorization, async (req,res) => {
+    const { content } = req.body;
+    const { id } = req.user;
     try {
-        const newPost = await createPost(content, userId)
+        const newPost = await createPost(content, id)
         res.status(200).send(newPost)
     } catch (error) {
         res.status(404).json({ error: error.message });
@@ -53,7 +60,6 @@ router.post('/:id/like', async (req, res) => {
 });
 
 // rutas PUT 
-
 router.put('/:id', async (req, res) => {
     const id = req.params.id;
     const { content } = req.body;
