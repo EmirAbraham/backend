@@ -15,13 +15,5 @@ const getAllPosts = async () => {
     })
     return allPosts
 }
-// const coment = allPosts.forEach(async element => {
-//     await Socialcomment.findAll({where:{socialpostId:element.id},
-//     include: {
-//         model: Socialcomment,
-//         attributes: ['content', 'likes']
-//     }})
-// });
-// return coment
-// }
+
 module.exports = {getAllPosts}
