@@ -12,7 +12,8 @@ const getAllPosts = async () => {
                 model: Socialcomment,
                 attributes: ['content', 'likes']
             }
-        ]
+        ],
+        order: [['createdAt', 'DESC']] // Ordena los posts según la propiedad "createdAt" en orden descendente
     })
     return allPosts
 }
