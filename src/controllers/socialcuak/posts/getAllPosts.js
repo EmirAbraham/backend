@@ -10,7 +10,11 @@ const getAllPosts = async () => {
             },
             {
                 model: Socialcomment,
-                attributes: ['content', 'likes']
+                attributes: ['content', 'likes'],
+                include: {
+                    model: Userdev,
+                    attributes: ['name', 'image']
+                }
             }
         ],
         order: [['createdAt', 'DESC']] // Ordena los posts según la propiedad "createdAt" en orden descendente
