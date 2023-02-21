@@ -2,8 +2,7 @@ const { Router } = require("express")
 const router = Router()
 const { Socialcomment, Socialpost } = require('../../db'); // Importar modelos
 const { getAllPosts } = require('../../controllers/socialcuak/posts/getAllPosts');
-const { getAllComments, createComment } = require('../../controllers/socialcuak/comments/index.js');
-const { likeComment } = require("../../controllers/socialcuak/comments/likeComment");
+const { getAllComments, createComment, likeComment } = require('../../controllers/socialcuak/comments/index.js');
 
 
 //RUTA POST DE COMENTARIOS
