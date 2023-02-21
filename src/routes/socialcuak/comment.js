@@ -3,6 +3,7 @@ const router = Router()
 const { Socialcomment, Socialpost } = require('../../db'); // Importar modelos
 const { getAllPosts } = require('../../controllers/socialcuak/posts/getAllPosts');
 const { getAllComments, createComment } = require('../../controllers/socialcuak/comments/index.js');
+const { likeComment } = require("../../controllers/socialcuak/comments/likeComment");
 
 
 //RUTA POST DE COMENTARIOS
@@ -16,6 +17,16 @@ router.post('/:id/comment', async (req, res) => {
     res.status(200).json(result);
   } catch (error) {
     res.status(400).json({ error: error.message });
+  }
+});
+
+router.post('/:id/comment/:id/like', async (req, res) => {
+  const id = req.params.id;
+  try {
+      await likeComment(id);
+      res.status(200).json({ message: 'Like agregado correctamente.' });
+  } catch (error) {
+      res.status(404).json({ message: 'Error al agregar el like.' });
   }
 });
 
