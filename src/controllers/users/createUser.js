@@ -29,7 +29,7 @@ const createUser = async (req, res) => {
         if (error) throw error;
 
         //Mensaje de confirmación
-        res.json({token, user: newUser});
+        res.json({token, user: {id: newUser.dataValues.id, name, nickName, email}});
     });
 
 }
