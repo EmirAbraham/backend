@@ -5,7 +5,7 @@ const authorization = (req, res, next) => {
     const token = req.header('x-auth-token');
 
     // Revisar si no hay token
-    if (!token) return res.status(401).json({msg: 'There is not token, access denied'});
+    if (!token) return res.status(401).json({errors: [{msg: 'Envíe un tóken'}]});
 
     // Validar el token
     try {
@@ -13,7 +13,7 @@ const authorization = (req, res, next) => {
         req.user = encryption.user;
         next()
     } catch (error) {
-        res.status(401).json({msg: 'Invalid Token'})
+        res.status(401).json({errors: [{msg: 'Tóken inválido'}]})
     }
 }
 
