@@ -9,7 +9,7 @@ const getUsers = async (params) => {
     let order = [];
     let limit = 10;
     let offset = ((page ? page : 1) - 1) * limit;
-let url = 'https://backend-production-c946.up.railway.app/users?';
+    let url = 'https://backend-production-c946.up.railway.app/users?';
     const currentPage = Number(page) || (offset / limit) + 1;
 
     if (name) {
@@ -34,10 +34,7 @@ let url = 'https://backend-production-c946.up.railway.app/users?';
             'id',
             'name',
             'image',
-            /* // 'descriptionShort',
-            'email',
-            'nickName',
-            'birthdate', */
+            'description'
         ]
     });
 

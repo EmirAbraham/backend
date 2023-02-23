@@ -1,30 +1,39 @@
-const { Userdev } = require("../../db")
+const { Userdev } = require("../../db");
+const { Op } = require('sequelize');
+const bcryptjs = require('bcryptjs');
+const { validationResult } = require('express-validator');
+const jwt = require('jsonwebtoken');
+const { transporter } = require('../../mailer/send');
 
-const createUser = async (params) => {
+const createUser = async (req, res) => {
+
+    const { email, password, nickName, name } = req.body;
+
+    // Hashear la password
+    const salt = await bcryptjs.genSalt(10);
+    const newPassword = await bcryptjs.hash(password, salt);
     
-    const { name, email, nickName, image, birthdate } = params;
+    // Crear el usuario
+    const newUser = await Userdev.create({ password: newPassword, email, nickName, name });
 
-    const required = [ 'name', 'email', 'nickName' ];
-    for (const el of required) {
-        if(!params.hasOwnProperty(el)) throw new Error(`${el} is required`);
+    // Crear el payload del JWT
+    const payload = {
+        user: {
+            id: newUser.id
+        }
     }
 
-    const [ user, created ] = await Userdev.findOrCreate({
-        where: {
-            email,
-        },
-        defaults: {
-            name,
-            email,
-            nickName,
-            image,
-            birthdate,
-        }
+    // Firmar el JWT
+    jwt.sign(payload, process.env.SECRETA, {
+        expiresIn: 172800 // vence en 2 días
+    }, (error, token) => {
+        if (error) throw error;
+        
+        //Mensaje de confirmación
+        res.json({token, user: {id: newUser.dataValues.id, name, nickName, email}});
     });
+    
 
-    if (!created) throw new Error(`User already exists`);
-
-    return user;
 }
   
 module.exports = { createUser };

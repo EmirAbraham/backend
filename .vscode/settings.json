@@ -3,6 +3,8 @@
         "API",
         "routes",
         "controllers",
-        "models"
+        "models",
+        "middlewares",
+        "validators"
     ]
 }

@@ -13,8 +13,8 @@ module.exports = (sequelize) => {
       allowNull: false,
     },
     likes: {
-      type: DataTypes.INTEGER,
-      defaultValue: 0,
+      type: DataTypes.ARRAY(DataTypes.UUID),
+      defaultValue: [],
     },
     active: {
       type: DataTypes.BOOLEAN,

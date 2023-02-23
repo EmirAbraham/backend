@@ -2,7 +2,11 @@ const { Userdev, Socialpost } = require('../../db.js');
 
 const getUserDetails = async (id) => {
     
-    const user = await Userdev.findByPk(id);
+    const user = await Userdev.findByPk(id, {
+        attributes: {
+            exclude: ['password', 'active']
+        }
+    });
 
     const posts = await Socialpost.findAll({
         where: {

@@ -1,69 +1,45 @@
-const {Router} = require('express');
+const { Router } = require('express');
 const router = Router();
-const {getAllPosts} = require('../../controllers/socialcuak/posts/getAllPosts')
-const {getPostById} = require('../../controllers/socialcuak/posts/getPostById')
-const {createPost} = require('../../controllers/socialcuak/posts/createPost')
-const {updatePost} = require('../../controllers/socialcuak/posts/updatePost')
-const {deletePost} = require('../../controllers/socialcuak/posts/deletePost')
 
-// rutas GET de los posts
+// middlewares
+const { authorization } = require('../../middlewares/auth.js');
 
-router.get('/', async (req,res)=> {
-    const allPosts = await getAllPosts();
+// validators
+const {
+    validateGetPostDetails,
+    validateCreatePost,
+    validateLikePost,
+    validateUpdatePost,
+    validateDeletePost
+} = require('../../validators/socialcuak.js');
+
+// controllers
+const { 
+    getPosts, 
+    getPostDetails, 
+    createPost,
+    likePost, 
+    updatePost, 
+    deletePost 
+} = require('../../controllers/socialcuak/posts/index.js');
+
+router.get('/', async (req, res) => {
     try {
-        res.status(200).send(allPosts);
+        const result = await getPosts(req.query);
+        res.status(200).json(result);;
     } catch (error) {
-        res.status(404).send(error.message);
+        res.status(500).send(error.message);
     }
 })
 
-router.get('/:id', async (req,res) => {
-    const id = req.params.id;
-    const postById = await getPostById(id);
-    try {
-        res.status(200).send(postById)
-    } catch (error) {
-        res.status(404).send(error.message)
-    }
-})
+router.get('/:id', authorization, validateGetPostDetails, getPostDetails);
 
+router.post('/', authorization, validateCreatePost, createPost);
 
-// ruta POST de los posts
+router.post('/:id/like', authorization, validateLikePost, likePost);
 
-router.post('/', async (req,res) => {
-    const {content, userId} = req.body;
-    try {
-        const newPost = await createPost(content, userId)
-        res.status(200).send(newPost)
-    } catch (error) {
-        res.status(404).json({ error: error.message });
-    }
-})
+router.put('/:id', authorization, validateUpdatePost, updatePost);
 
-// rutas PUT 
-
-router.put('/:id', async (req, res) => {
-    const id = req.params.id;
-    const {content} = req.body;
-    await updatePost(id, content);
-    try {
-
-        res.status(200).send('Posteo modificado exitosamente.')
-    } catch (error) {
-        res.status(404).send('El posteo no pudo ser modificado')
-    }
-})
-
-// rutas DELETE
-
-router.delete('/:id', async (req, res)=> {
-    const id = req.params.id;
-    await deletePost(id);
-    try {
-        res.status(200).send('Post eliminado correctamente')
-    } catch (error) {
-        res.status(404).send('No se pudo eliminar el post')
-    }
-})
+router.delete('/:id', authorization, validateDeletePost, deletePost);
 
 module.exports = router;
