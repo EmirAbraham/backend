@@ -15,7 +15,7 @@ const updatePost = async (req, res) => {
                 },
                 {
                     model: Socialcomment,
-                    attributes: ['content', 'likes', 'active'/* , 'createdAt' */],
+                    attributes: ['content', 'likes', 'active', 'createdAt'],
                     order: [['likes', 'DESC']],
                     where: {active: true},
                     limit: 2,
