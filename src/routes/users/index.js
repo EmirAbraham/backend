@@ -3,7 +3,6 @@ const router = Router();
 
 // middlewares
 const { authorization } = require('../../middlewares/auth.js');
-const { check } = require('express-validator');
 
 // validators
 const { 
