@@ -34,10 +34,7 @@ const getUsers = async (params) => {
             'id',
             'name',
             'image',
-            /* // 'descriptionShort',
-            'email',
-            'nickName',
-            'birthdate', */
+            'description'
         ]
     });
 
