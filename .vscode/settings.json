@@ -4,6 +4,7 @@
         "routes",
         "controllers",
         "models",
-        "middlewares"
+        "middlewares",
+        "validators"
     ]
 }

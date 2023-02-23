@@ -3,7 +3,15 @@ const router = Router();
 
 // middlewares
 const { authorization } = require('../../middlewares/auth.js');
-const { check } = require('express-validator');
+
+// validators
+const {
+    validateGetPostById,
+    validateCreatePost,
+    validateLikePost,
+    validateUpdatePost,
+    validateDeletePost
+} = require('../../validators/socialcuak.js');
 
 // controllers
 const { 
@@ -26,8 +34,11 @@ router.get('/', async (req, res) => {
     }
 })
 
-router.get('/:id', async (req, res) => {
-    const id = req.params.id;
+router.get('/:id',
+    authorization,
+    validateGetPostById,
+    async (req, res) => {
+    const { id } = req.params;
     const postById = await getPostById(id);
     try {
         res.status(200).send(postById)
@@ -37,11 +48,15 @@ router.get('/:id', async (req, res) => {
 })
 
 
-// ruta POST de los posts
-router.post('/', authorization, async (req,res) => {
+// rutas POST de los posts
+router.post('/', 
+    authorization,
+    validateCreatePost, 
+    async (req,res) => {
     const { content } = req.body;
     const { id } = req.user;
     try {
+        //REFACTORIZAR: ENVIARLE TODO EL REQUEST
         const newPost = await createPost(content, id)
         res.status(200).send(newPost)
     } catch (error) {
@@ -49,8 +64,11 @@ router.post('/', authorization, async (req,res) => {
     }
 })
 
-router.post('/:id/like', async (req, res) => {
-    const id = req.params.id;
+router.post('/:id/like', 
+    authorization,
+    validateLikePost,
+    async (req, res) => {
+    const { id } = req.params;
     try {
         await likePost(id);
         res.status(200).json({ message: 'Like agregado correctamente.' });
@@ -59,9 +77,12 @@ router.post('/:id/like', async (req, res) => {
     }
 });
 
-// rutas PUT 
-router.put('/:id', async (req, res) => {
-    const id = req.params.id;
+// ruta PUT 
+router.put('/:id', 
+    authorization,
+    validateUpdatePost,
+    async (req, res) => {
+    const { id } = req.params;
     const { content } = req.body;
     await updatePost(id, content);
     try {
@@ -72,9 +93,11 @@ router.put('/:id', async (req, res) => {
     }
 })
 
-// rutas DELETE
-
-router.delete('/:id', async (req, res) => {
+// ruta DELETE
+router.delete('/:id', 
+    authorization,
+    validateDeletePost,
+    async (req, res) => {
     const id = req.params.id;
     await deletePost(id);
     try {
