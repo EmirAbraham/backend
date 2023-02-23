@@ -3,12 +3,12 @@ const router = Router();
 
 // middlewares
 const { authorization } = require('../../middlewares/auth.js');
-const { check } = require('express-validator');
 
 // validators
 const { 
   validateGetUserDetails, 
-  validateCreateUser 
+  validateCreateUser,
+  validateUpdateDeleteUser
 } = require('../../validators/users.js');
 
 // controllers
@@ -29,7 +29,8 @@ router.get('/', async (req, res) => {
   }
 });
 
-router.get('/:id', 
+router.get('/:id',
+  authorization, 
   validateGetUserDetails, 
   async (req, res) => {
     try {
@@ -53,17 +54,10 @@ router.post('/',
   }
 );
 
-router.delete('/:id', async (req, res) => {
-  try {
-    const { id } = req.params;
-    await deleteUser(id);
-    res.json("Usuario eliminado");
-  } catch (error) {
-    res.status(400).json({ error: error.message });
-  }
-});
-
-router.put('/:id', async (req, res) => {
+router.put('/:id',
+  authorization, 
+  validateUpdateDeleteUser,
+  async (req, res) => {
   try {
     const { id } = req.params;
     await updateUser(id, req.body);
@@ -71,6 +65,19 @@ router.put('/:id', async (req, res) => {
   } catch (error) {
     res.status(400).json({ error: error.message });
   }
+});
+
+router.delete('/:id',
+  authorization,
+  validateUpdateDeleteUser,
+  async (req, res) => {
+    try {
+      const { id } = req.params;
+      await deleteUser(id);
+      res.json("Usuario eliminado");
+    } catch (error) {
+      res.status(400).json({ error: error.message });
+    }
 });
 
 module.exports = router;

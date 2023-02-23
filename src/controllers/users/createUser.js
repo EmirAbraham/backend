@@ -3,6 +3,7 @@ const { Op } = require('sequelize');
 const bcryptjs = require('bcryptjs');
 const { validationResult } = require('express-validator');
 const jwt = require('jsonwebtoken');
+const { transporter } = require('../../mailer/send');
 
 const createUser = async (req, res) => {
 
@@ -27,10 +28,11 @@ const createUser = async (req, res) => {
         expiresIn: 172800 // vence en 2 días
     }, (error, token) => {
         if (error) throw error;
-
+        
         //Mensaje de confirmación
-        res.json({token, user: newUser});
+        res.json({token, user: {id: newUser.dataValues.id, name, nickName, email}});
     });
+    
 
 }
   
