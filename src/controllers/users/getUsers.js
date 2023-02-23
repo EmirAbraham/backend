@@ -10,15 +10,15 @@ const getUsers = async (params) => {
     let limit = 10;
     let offset = ((page ? page : 1) - 1) * limit;
     let url = `http://localhost:3001/users?`;
-    const currentPage = Number(page) || (offset / limit) + 1;
+    const currentPage = Number(page) || (offset / limit) + 1;   
 
     if (name) {
         where.name = {[Op.iLike]: `%${name}%`}; 
-        url = `${url}name=${name}&`;
+        url = `${url}name=${name}&`; 
     }
     if (nickName) {
         where.nickName = {[Op.iLike]: `${nickName}%`}; 
-        url = `${url}nickName=${nickName}&`;
+        url = `${url}nickName=${nickName}&`; 
     }
     if (alpha) {
         order.push(['name', `${alpha}`]); 
