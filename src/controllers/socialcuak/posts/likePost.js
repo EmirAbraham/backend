@@ -4,6 +4,7 @@ const likePost = async (req, res) => {
     
     try {
         const { id } = req.params;
+        const userId = req.user.id;
         
         const post = await Socialpost.findByPk(id, {
             include: [
@@ -33,7 +34,7 @@ const likePost = async (req, res) => {
             return res.status(404).json({ errors: [{msg: "El autor de la publicación no existe o fue eliminado"}]});
         }
 
-        post.likes += 1;
+        post.likes = [...post.likes, userId];
         const newPost = await post.save();
         
         return res.status(200).json(newPost);

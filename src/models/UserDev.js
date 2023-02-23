@@ -45,6 +45,11 @@ module.exports = (sequelize) => {
     skills: {
       type: DataTypes.ARRAY(DataTypes.STRING(20))
     },
+    admin: {
+      type: DataTypes.BOOLEAN,
+      allowNull: false,
+      defaultValue: false
+    }
   },
   {timestamps:false});
 };
