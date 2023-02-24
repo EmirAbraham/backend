@@ -13,11 +13,13 @@ const {
 
 // controllers
 const {
-  getUsers,
-  getUserDetails,
-  deleteUser,
-  updateUser,
-} = require("../../controllers/users/index.js");
+    getUsers,
+    getUserDetails,
+    deleteUser,
+    updateUser,
+    updateStatus
+} = require('../../controllers/users/index.js');
+
 
 router.get("/", async (req, res) => {
   try {
@@ -38,19 +40,33 @@ router.get("/:id", authorization, validateGetUserDetails, async (req, res) => {
   }
 });
 
+router.put('/:id/status',
+  authorization, 
+  async (req, res) => {
+  try {
+    const { id } = req.params;
+    const newStatus = await updateStatus(id, req.body, req.user.id);
+    res.status(200).json(newStatus);
+  } catch (error) {
+    res.status(400).json({ error: error.message });
+  }
+});
+
 router.put('/:id',
   authorization, 
   validateUpdateUser,
   async (req, res) => {
   try {
     const { id } = req.params;
-    await updateUser(id, req.body);
+    await updateUser(id, req);
     res.json("Actualización exitosa");
   } catch (error) {
     res.status(400).json({ error: error.message });
   }
 });
 
+
 router.delete('/:id', authorization, validateDeleteUser, deleteUser);
 
 module.exports = router;
+
