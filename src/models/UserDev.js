@@ -45,10 +45,10 @@ module.exports = (sequelize) => {
     skills: {
       type: DataTypes.ARRAY(DataTypes.STRING(20))
     },
-    admin: {
-      type: DataTypes.BOOLEAN,
+    status: {
+      type: DataTypes.STRING,
       allowNull: false,
-      defaultValue: false
+      defaultValue: 'dev'
     }
   },
   {timestamps:false});

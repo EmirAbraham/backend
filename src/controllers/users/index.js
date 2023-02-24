@@ -3,6 +3,7 @@ const { getUserDetails } = require("./getUserDetails.js");
 const { createUser } = require("./createUser.js");
 const { deleteUser } = require("./deleteUser");
 const { updateUser } = require("./updateUser");
+const { updateStatus } = require("./updateStatus");
 
 module.exports = {
   getUsers,
@@ -10,4 +11,5 @@ module.exports = {
   createUser,
   deleteUser,
   updateUser,
+  updateStatus,
 };

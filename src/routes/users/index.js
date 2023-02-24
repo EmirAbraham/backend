@@ -18,7 +18,8 @@ const {
     getUserDetails,
     createUser,
     deleteUser,
-    updateUser
+    updateUser,
+    updateStatus
 } = require('../../controllers/users/index.js');
 
 router.get('/', async (req, res) => {
@@ -55,19 +56,33 @@ router.post('/',
   }
 );
 
+router.put('/:id/status', async (req, res) => {
+  // console.log(req.body);
+  // console.log(req.params);
+  try {
+    const { id } = req.params;
+    await updateStatus(id, req.body);
+    res.status(200).json("Status actualizado correctamente");
+  } catch (error) {
+    res.status(400).json({ error: error.message });
+  }
+});
+
 router.put('/:id',
   authorization, 
   validateUpdateUser,
   async (req, res) => {
   try {
     const { id } = req.params;
-    await updateUser(id, req.body);
+    await updateUser(id, req);
     res.json("Actualización exitosa");
   } catch (error) {
     res.status(400).json({ error: error.message });
   }
 });
 
+
 router.delete('/:id', authorization, validateDeleteUser, deleteUser);
+
 
 module.exports = router;
