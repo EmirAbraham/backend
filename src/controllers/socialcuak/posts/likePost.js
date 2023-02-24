@@ -11,18 +11,6 @@ const likePost = async (req, res) => {
                 {
                     model: Userdev,
                     attributes: ['name', 'image', 'active']
-                },
-                {
-                    model: Socialcomment,
-                    attributes: ['content', 'likes', 'active'/* , 'createdAt' */],
-                    order: [['likes', 'DESC']],
-                    where: {active: true},
-                    limit: 2,
-                    required: false,
-                    include: {
-                        model: Userdev,
-                        attributes: ['name', 'image']
-                    },
                 }
             ]
         });
@@ -34,10 +22,18 @@ const likePost = async (req, res) => {
             return res.status(404).json({ errors: [{msg: "El autor de la publicación no existe o fue eliminado"}]});
         }
 
-        post.likes = [...post.likes, userId];
-        const newPost = await post.save();
-        
-        return res.status(200).json(newPost);
+        const likes = post.likes;
+        const newLikes = likes.filter(el => el !== userId);
+
+        if (newLikes.length < likes.length) {
+            post.likes = newLikes;
+            await post.save(); 
+            return res.status(200).json({msg: "El like se ha retirado"});
+        } else {
+            post.likes = [...likes, userId];
+            await post.save();
+            return res.status(200).json({msg: "El like se ha agregado"});
+        }
 
     } catch (error) {
         res.status(500).json({ errors: [{msg: error.message}] });
