@@ -5,10 +5,11 @@ const router = Router();
 const { authorization } = require("../../middlewares/auth.js");
 
 // validators
-const {
-  validateGetUserDetails,
-  validateUpdateDeleteUser,
-} = require("../../validators/users.js");
+const { 
+    validateGetUserDetails, 
+    validateUpdateUser,
+    validateDeleteUser
+} = require('../../validators/users.js');
 
 // controllers
 const {
@@ -37,34 +38,19 @@ router.get("/:id", authorization, validateGetUserDetails, async (req, res) => {
   }
 });
 
-router.put(
-  "/:id",
-  authorization,
-  validateUpdateDeleteUser,
+router.put('/:id',
+  authorization, 
+  validateUpdateUser,
   async (req, res) => {
-    try {
-      const { id } = req.params;
-      await updateUser(id, req.body);
-      res.json("Actualización exitosa");
-    } catch (error) {
-      res.status(400).json({ error: error.message });
-    }
+  try {
+    const { id } = req.params;
+    await updateUser(id, req.body);
+    res.json("Actualización exitosa");
+  } catch (error) {
+    res.status(400).json({ error: error.message });
   }
-);
+});
 
-router.delete(
-  "/:id",
-  authorization,
-  validateUpdateDeleteUser,
-  async (req, res) => {
-    try {
-      const { id } = req.params;
-      await deleteUser(id);
-      res.json("Usuario eliminado");
-    } catch (error) {
-      res.status(400).json({ error: error.message });
-    }
-  }
-);
+router.delete('/:id', authorization, validateDeleteUser, deleteUser);
 
 module.exports = router;
