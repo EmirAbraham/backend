@@ -7,7 +7,7 @@ const bcryptjs = require('bcryptjs');
 // jwt para tóken de autenticación
 const jwt = require('jsonwebtoken');
 
-const authController = async (req, res, next) => {
+const loginController = async (req, res, next) => {
 
     const { email, password } = req.body;
 
@@ -43,4 +43,4 @@ const authController = async (req, res, next) => {
         res.status(500).send({errors: [{msg: error.message}]})
     }
 }
-module.exports = { authController }
+module.exports = { loginController }
