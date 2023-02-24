@@ -2,7 +2,7 @@ const { Router } = require("express");
 
 //IMPORTAMOS LAS RUTAS
 const users = require("./users/index.js");
-const signup = require("./signup/index.js");
+const signup = require("./signup/index.js")
 const login = require("./login/index.js");
 const qacuak = require("./qacuak/index.js");
 const workcuak = require("./workcuak/index.js");
