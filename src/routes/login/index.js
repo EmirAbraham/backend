@@ -3,14 +3,14 @@ const { Router } = require('express');
 const router = Router();
 
 // validators 
-const { validateAuth } = require('../../validators/auth.js');
+const { validateLogin } = require('../../validators/login.js');
 
 // controllers
-const { authController } = require('../../controllers/auth/index.js');
+const { loginController } = require('../../controllers/login/index.js');
 
 router.post('/', 
-  validateAuth,
-  authController
+  validateLogin,
+  loginController
 );
 
 module.exports = router;

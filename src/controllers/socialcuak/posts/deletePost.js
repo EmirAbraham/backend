@@ -11,9 +11,10 @@ const deletePost = async (req, res) => {
                 {
                     model: Userdev,
                     attributes: ['active']
-                }
+                }                
             ]
         });
+        
 
         if (!post || !post.dataValues.active) {
             return res.status(404).json({ errors: [{msg: "La publicación no existe o ya fue eliminada"}]});
@@ -22,7 +23,9 @@ const deletePost = async (req, res) => {
             return res.status(404).json({ errors: [{msg: "El autor de la publicación no existe o fue eliminado"}]});
         }
         if (post.dataValues.userdevId !== userId) {
-            return res.status(401).json({ errors: [{msg: "El usuario no es el autor de la publicación"}]});
+            if (!req.user.status === 'admin' || !req.user.status === 'superadmin') {
+                return res.status(401).json({ errors: [{msg: "El usuario no está habilitado para borrar esta publicación"}]});
+            }
         }
         
         post.active = false;
