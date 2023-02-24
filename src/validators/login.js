@@ -3,7 +3,7 @@ const { check } = require('express-validator');
 const { validateResult } = require('../helpers/validateHelper.js');
 
 // Validaciones
-const validateAuth = [
+const validateLogin = [
     check('email')
         .normalizeEmail()
         .trim()
@@ -18,4 +18,4 @@ const validateAuth = [
     }
 ];
 
-module.exports = { validateAuth }
+module.exports = { validateLogin }

@@ -5,7 +5,7 @@ const { validationResult } = require('express-validator');
 const jwt = require('jsonwebtoken');
 const { transporter } = require('../../mailer/send');
 
-const createUser = async (req, res) => {
+const signupController = async (req, res) => {
 
     const { email, password, nickName, name } = req.body;
 
@@ -36,4 +36,4 @@ const createUser = async (req, res) => {
 
 }
   
-module.exports = { createUser };
+module.exports = { signupController };
