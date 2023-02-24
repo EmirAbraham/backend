@@ -1,26 +1,24 @@
-const { Router } = require('express');
+const { Router } = require("express");
 const router = Router();
 
 // middlewares
-const { authorization } = require('../../middlewares/auth.js');
+const { authorization } = require("../../middlewares/auth.js");
 
 // validators
-const { 
-  validateGetUserDetails, 
-  validateCreateUser,
-  validateUpdateDeleteUser
-} = require('../../validators/users.js');
+const {
+  validateGetUserDetails,
+  validateUpdateDeleteUser,
+} = require("../../validators/users.js");
 
 // controllers
 const {
-    getUsers,
-    getUserDetails,
-    createUser,
-    deleteUser,
-    updateUser
-} = require('../../controllers/users/index.js');
+  getUsers,
+  getUserDetails,
+  deleteUser,
+  updateUser,
+} = require("../../controllers/users/index.js");
 
-router.get('/', async (req, res) => {
+router.get("/", async (req, res) => {
   try {
     const result = await getUsers(req.query);
     res.status(200).json(result);
@@ -29,45 +27,33 @@ router.get('/', async (req, res) => {
   }
 });
 
-router.get('/:id',
-  authorization, 
-  validateGetUserDetails, 
+router.get("/:id", authorization, validateGetUserDetails, async (req, res) => {
+  try {
+    const { id } = req.params;
+    const result = await getUserDetails(id);
+    res.status(200).json(result);
+  } catch (error) {
+    res.status(400).json({ error: error.message });
+  }
+});
+
+router.put(
+  "/:id",
+  authorization,
+  validateUpdateDeleteUser,
   async (req, res) => {
     try {
       const { id } = req.params;
-      const result = await getUserDetails(id);
-      res.status(200).json(result);
-    } catch (error) {
-      res.status(400).json({ error: error.message });
-    }
-});
-
-router.post('/', 
-  validateCreateUser,
-  async (req, res) => {
-    try {
-      const result = createUser(req, res);
-      return result;
+      await updateUser(id, req.body);
+      res.json("Actualización exitosa");
     } catch (error) {
       res.status(400).json({ error: error.message });
     }
   }
 );
 
-router.put('/:id',
-  authorization, 
-  validateUpdateDeleteUser,
-  async (req, res) => {
-  try {
-    const { id } = req.params;
-    await updateUser(id, req.body);
-    res.json("Actualización exitosa");
-  } catch (error) {
-    res.status(400).json({ error: error.message });
-  }
-});
-
-router.delete('/:id',
+router.delete(
+  "/:id",
   authorization,
   validateUpdateDeleteUser,
   async (req, res) => {
@@ -78,6 +64,7 @@ router.delete('/:id',
     } catch (error) {
       res.status(400).json({ error: error.message });
     }
-});
+  }
+);
 
 module.exports = router;
