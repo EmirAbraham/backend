@@ -6,9 +6,10 @@ const { authorization } = require('../../middlewares/auth.js');
 
 // validators
 const { 
-  validateGetUserDetails, 
-  validateCreateUser,
-  validateUpdateDeleteUser
+    validateGetUserDetails, 
+    validateCreateUser,
+    validateUpdateUser,
+    validateDeleteUser
 } = require('../../validators/users.js');
 
 // controllers
@@ -56,7 +57,7 @@ router.post('/',
 
 router.put('/:id',
   authorization, 
-  validateUpdateDeleteUser,
+  validateUpdateUser,
   async (req, res) => {
   try {
     const { id } = req.params;
@@ -67,17 +68,6 @@ router.put('/:id',
   }
 });
 
-router.delete('/:id',
-  authorization,
-  validateUpdateDeleteUser,
-  async (req, res) => {
-    try {
-      const { id } = req.params;
-      await deleteUser(id);
-      res.json("Usuario eliminado");
-    } catch (error) {
-      res.status(400).json({ error: error.message });
-    }
-});
+router.delete('/:id', authorization, validateDeleteUser, deleteUser);
 
 module.exports = router;
