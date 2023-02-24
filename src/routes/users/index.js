@@ -56,13 +56,13 @@ router.post('/',
   }
 );
 
-router.put('/:id/status', async (req, res) => {
-  // console.log(req.body);
-  // console.log(req.params);
+router.put('/:id/status',
+  authorization, 
+  async (req, res) => {
   try {
     const { id } = req.params;
-    await updateStatus(id, req.body);
-    res.status(200).json("Status actualizado correctamente");
+    const newStatus = await updateStatus(id, req.body, req.user.id);
+    res.status(200).json(newStatus);
   } catch (error) {
     res.status(400).json({ error: error.message });
   }
