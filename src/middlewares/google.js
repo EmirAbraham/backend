@@ -1,27 +1,36 @@
-const passport = require("passport");
-const GoogleStrategy = require("passport-google-oauth20").Strategy;
-const { GOOGLE_CLIENT_ID, GOOGLE_CLIENT_SECRET } = process.env;
-const { userDev } = require("../db.js");
+const passport = require('passport');
+const GoogleStrategy = require('passport-google-oauth2').Strategy;
 
-const emails = ["jimenezgalvezeduardo@gmail.com"];
+const { Userdev } = require('../db.js')
 
-const authGoogle = passport.use(
-  new GoogleStrategy(
-    {
-      clientID: GOOGLE_CLIENT_ID,
-      clientSecret: GOOGLE_CLIENT_SECRET,
-      callbackURL: "http://localhost:3001/signup/google",
+passport.use(new GoogleStrategy({
+    clientID: process.env.GOOGLE_CLIENT_ID,
+    clientSecret: process.env.GOOGLE_CLIENT_SECRET,
+    callbackURL: "http://localhost:3001/auth/google/callback",
+    passReqToCallback: true
     },
-    function (accessToken, refreshToken, profile, cb) {
-      const response = emails.includes(profile.emails[0].value);
+    function(request, accessToken, refreshToken, profile, done) {
 
-      if (response) {
-        done(null, profile);
-      } else {
-        emails.push(profile.emails.value);
-        done(null, profile);
-      }
+        Userdev.findOrCreate({ 
+          where: { 
+            email: profile.email 
+          }, 
+          defaults: {
+            name: profile.displayName,
+            nickName: `${profile.given_name}_${profile.family_name}`,
+            image: profile.picture,
+            password: profile.email,
+            // provider: profile.provider
+          } 
+        }).then( user => done(null, user));
+
     }
-  )
-);
-module.exports = { authGoogle };
+));
+
+passport.serializeUser(function (user, done) {
+    done(null, user);
+})
+
+passport.deserializeUser(function (user, done) {
+    done(null, user);
+})

@@ -49,7 +49,11 @@ module.exports = (sequelize) => {
       type: DataTypes.STRING,
       allowNull: false,
       defaultValue: 'dev'
-    }
+    },
+    // provider: {
+    //   type: DataTypes.STRING,
+    //   defaultValue: null
+    // }
   },
   {timestamps:false});
 };
