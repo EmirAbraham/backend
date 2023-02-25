@@ -5,6 +5,8 @@ const deleteUser = async (req, res) => {
     try {
         const { id } = req.params;
         const userId = req.user.id;
+        const superadmin = await Userdev.findByPk(req.user.id)
+        const admin = await Userdev.findByPk(req.user.id)
 
         const user = await Userdev.findByPk(id);
 
@@ -12,7 +14,8 @@ const deleteUser = async (req, res) => {
             return res.status(404).json({ errors: [{msg: "El usuario no existe o ya fue eliminado"}]});
         }
         if (userId !== user.dataValues.id) {
-            return res.status(404).json({ errors: [{msg: "El usuario a eliminar no corresponde al usuario loggeado"}]});
+            if(!(admin.dataValues.status === 'admin' || superadmin.dataValues.status === 'superadmin')){
+                return res.status(404).json({ errors: [{msg: "El usuario no tiene permitido eliminar a este usuario"}]});}
         }
 
         user.active = false;
