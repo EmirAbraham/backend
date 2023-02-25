@@ -14,6 +14,7 @@ const updateStatus = async (id, params, userid) => {
             id: id
         }
     })
+    return "Status actualizado correctamente"
 };
 
 module.exports = {updateStatus};
