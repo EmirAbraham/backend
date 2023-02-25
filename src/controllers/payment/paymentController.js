@@ -7,7 +7,7 @@ mercadopago.configure({
 });
 
 // Crea un objeto de preferencia
-const pay = (req, res) => {
+const pay = (req,res) => {
   let preference = {
     items: [
       {
@@ -18,11 +18,12 @@ const pay = (req, res) => {
       },
     ],
     back_urls: {
-      success: "https://backend-production-c946.up.railway.app/payment/feedback",
+      success: "http://localhost:5173/gracias",
       failure: "https://backend-production-c946.up.railway.app/payment/feedback",
       pending: "https://backend-production-c946.up.railway.app/payment/feedback",
     },
     auto_return: "approved",
+
   };
   mercadopago.preferences
     .create(preference)
