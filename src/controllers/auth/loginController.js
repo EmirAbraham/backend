@@ -37,7 +37,7 @@ const logInController = async (req, res, next) => {
             if (error) throw error;
 
             //Mensaje de confirmación
-            res.json({token});
+            res.json({token, user: {id: user.dataValues.id}});
         });
 
     } catch (error) {
