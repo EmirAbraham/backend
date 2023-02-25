@@ -25,8 +25,8 @@ const logInController = async (req, res, next) => {
         // Si es correcto el email y la password crear el payload del JWT
         const payload = {
             user: {
-                id: newUser.id,
-                status: newUser.status
+                id: user.id,
+                status: user.status
             }
         }
 
