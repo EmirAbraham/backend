@@ -6,6 +6,7 @@ const deletePost = async (req, res) => {
         const { id } = req.params;
         const userId = req.user.id;
         const superadmin = await Userdev.findByPk(req.user.id)
+        const admin = await Userdev.findByPk(req.user.id)
 
         const post = await Socialpost.findByPk(id, {
             include: [
@@ -24,7 +25,7 @@ const deletePost = async (req, res) => {
             return res.status(404).json({ errors: [{msg: "El autor de la publicación no existe o fue eliminado"}]});
         }
         if (post.dataValues.userdevId !== userId) {
-            if (superadmin.dataValues.status !== 'admin' || superadmin.dataValues.status !== 'superadmin') {
+            if (!(admin.dataValues.status === 'admin' || superadmin.dataValues.status === 'superadmin')) {
                 return res.status(401).json({ errors: [{msg: "El usuario no está habilitado para borrar esta publicación"}]});
             }
         }

@@ -2,12 +2,15 @@ const { Router } = require("express")
 const router = Router()
 const { Socialcomment, Socialpost } = require('../../db'); // Importar modelos
 const { getPosts } = require('../../controllers/socialcuak/posts/index.js');
-const { getAllComments, createComment, likeComment } = require('../../controllers/socialcuak/comments/index.js');
+const { getAllComments, createComment, likeComment, deleteComment } = require('../../controllers/socialcuak/comments/index.js');
+const { authorization } = require('../../middlewares/auth.js')
 
 
 //RUTA POST DE COMENTARIOS
 
-router.post('/:id/comment', async (req, res) => {
+router.post('/:id/comment',
+  authorization, 
+  async (req, res) => {
   const { id } = req.params;
   const { userId, content } = req.body;
   
@@ -19,7 +22,9 @@ router.post('/:id/comment', async (req, res) => {
   }
 });
 
-router.post('/:id/comment/:id/like', async (req, res) => {
+router.post('/:id/comment/:id/like',
+  authorization, 
+  async (req, res) => {
   const id = req.params.id;
   try {
       await likeComment(id);
@@ -32,10 +37,12 @@ router.post('/:id/comment/:id/like', async (req, res) => {
 
 // RUTA PUT DE COMENTARIOS
 
-router.put('/:id/comment', async (req, res) => {
+router.put('/:id/comment',
+  authorization,
+  async (req, res) => {
     const id = req.params.id;
     const { content } = req.body;
-    const allPosts = await getAllPosts();
+    const allPosts = await getPosts();
     try {
       const modifyPost = await allPosts.find(post => post.id == (id));
         content && modifyPost.set({content: content});
@@ -61,7 +68,9 @@ router.delete('/:id/comment', async (req, res)=> {
   }
 });
 
-router.delete('/:id/comment/:id', async (req, res)=> {
+router.delete('/:id/comment/:id',
+  authorization,
+  async (req, res)=> {
   const id = req.params.id;
   const allComments = await getAllComments();
   try {
