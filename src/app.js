@@ -3,6 +3,7 @@ const session = require("express-session");
 const morgan = require("morgan");
 const routes = require("./routes/index.js");
 const passport = require("passport");
+const cors = require('cors');
 
 const app = express();
 
@@ -11,6 +12,10 @@ app.use(session({ secret: process.env.SECRETA }));
 app.use(express.json());
 app.use(passport.initialize());
 app.use(passport.session());
+app.use(cors());
+app.options('*', cors({
+  allowedHeaders: ['x-auth-token']
+}));
 app.use((req, res, next) => {
   res.header("Access-Control-Allow-Origin", "*");
   res.header("Access-Control-Allow-Credentials", "true");
@@ -25,3 +30,4 @@ app.use((req, res, next) => {
 app.use("/", routes);
 
 module.exports = app;
+
