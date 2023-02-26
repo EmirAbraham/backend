@@ -1,24 +1,37 @@
-const { Userdev, Socialpost } = require('../../db.js');
+const { Userdev, Socialpost, Socialcomment } = require('../../db.js');
 
 const getUserDetails = async (id) => {
     
     const user = await Userdev.findByPk(id, {
         attributes: {
             exclude: ['password', 'active']
-        }
+        }, 
+        include: [
+            {
+                model: Socialpost,
+                where: {active: true},
+                order: [['createdAt', 'DESC']],
+                required: false,
+                include: [
+                    {
+                        model: Userdev,
+                        attributes: ['id', 'name', 'image']
+                    },
+                    {
+                        model: Socialcomment,
+                        where: {active: true},
+                        required: false,
+                        include: {
+                            model: Userdev,
+                            attributes: ['id', 'name', 'image']
+                        }
+                    }
+                ],
+            },
+        ]
     });
 
-    const posts = await Socialpost.findAll({
-        where: {
-            userdevId: id,
-            active: true
-        },
-        order: [['createdAt', 'DESC']]
-    });
-
-    const result = { ...user.dataValues, socialposts: posts.map(el => el.dataValues)}
-
-    return result;
+    return user;
 }
 
 module.exports = { getUserDetails };
