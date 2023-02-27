@@ -33,8 +33,8 @@ router.get('/google',
 
 router.get('/google/callback',
     passport.authenticate('google', {
-        successRedirect: 'https://front-end-six-black.vercel.app/gracias',
-        failureRedirect: 'https://front-end-six-black.vercel.app/gracias',
+        successRedirect: 'https://front-end-six-black.vercel.app',
+        failureRedirect: 'https://front-end-six-black.vercel.app',
     })
 );
 
