@@ -35,9 +35,12 @@ const getPostByUserId = async (req) => {
                             attributes: ['id', 'name', 'image']
                         }
                     }
-                ],
+                ],        
+                limit,
+                offset
             },
-        ]
+        ],
+        where
     });
     const count = await Socialpost.count({where});
     const pages = Math.ceil( await count / limit );
