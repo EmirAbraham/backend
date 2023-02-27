@@ -33,8 +33,8 @@ router.get('/google',
 
 router.get('/google/callback',
     passport.authenticate('google', {
-        successRedirect: '/auth/google/protected',
-        failureRedirect: '/auth/google/failure',
+        successRedirect: 'https://pf-codecuak.vercel.app',
+        failureRedirect: 'https://pf-codecuak.vercel.app',
     })
 );
 
