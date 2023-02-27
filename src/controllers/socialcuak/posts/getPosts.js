@@ -3,6 +3,7 @@ const { Userdev, Socialpost, Socialcomment } = require('../../../db');
 const getPosts = async (params) => {
     
     const { page } = params;
+    console.log(page);
     let where = {active: true};
     let limit = 10;
     let offset = ((page ? page : 1) - 1) * limit;
