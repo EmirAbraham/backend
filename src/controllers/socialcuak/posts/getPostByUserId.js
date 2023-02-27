@@ -5,7 +5,10 @@ const getPostByUserId = async (req) => {
     const { page } = req.params;
     const { id } = req.params
     console.log(id)
-    let where = {active: true};
+    let where = {
+        active: true,
+        userdevId: id
+    };
     let limit = 10;
     let offset = ((page ? page : 1) - 1) * limit;
     let url = `https://backend-production-c946.up.railway.app/socialcuak/user/${id}?`;
