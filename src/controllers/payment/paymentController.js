@@ -18,9 +18,9 @@ const pay = (req, res) => {
       },
     ],
     back_urls: {
-      success: "https://pf-codecuak.vercel.app/gracias",
-      failure: "https://pf-codecuak.vercel.app/gracias",
-      pending: "https://pf-codecuak.vercel.app/gracias",
+      success: "https://front-end-six-black.vercel.app/gracias",
+      failure: "https://front-end-six-black.vercel.app/gracias",
+      pending: "https://front-end-six-black.vercel.app/gracias",
     },
     auto_return: "approved",
   };
