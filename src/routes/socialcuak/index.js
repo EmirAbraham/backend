@@ -37,7 +37,7 @@ router.get('/:id', authorization, validateGetPostDetails, getPostDetails);
 
 router.get('/user/:id', async (req, res) => {
     try {
-        const result = await getPostByUserId(req,res);
+        const result = await getPostByUserId(req);
         res.status(200).json(result);
     } catch (error) {
         res.status(400).send(error.message)

@@ -2,9 +2,8 @@ const { Userdev, Socialpost, Socialcomment } = require('../../../db');
 
 const getPostByUserId = async (req) => {
     
-    const { page } = req.params;
+    const { page } = req.query;
     const { id } = req.params
-    console.log(id)
     let where = {
         active: true,
         userdevId: id
