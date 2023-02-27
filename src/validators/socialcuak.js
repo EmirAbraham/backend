@@ -7,6 +7,19 @@ const { check, body } = require('express-validator');
 const { validateResult } = require('../helpers/validateHelper.js');
 
 // Validaciones
+const validateGetPostByUserId = [
+    check("id").custom((value) => {
+      return Userdev.findByPk(value, { attributes: ["active"] }).then((user) => {
+        if (!user || !user.dataValues.active) {
+          return Promise.reject("El usuario no existe o fue eliminado");
+        }
+      });
+    }),
+    (req, res, next) => {
+      validateResult(req, res, next);
+    },
+  ];
+
 const validateGetPostDetails = [
     check('id')
         .matches(/^[0-9a-fA-F]{8}\b-[0-9a-fA-F]{4}\b-[0-9a-fA-F]{4}\b-[0-9a-fA-F]{4}\b-[0-9a-fA-F]{12}$/)
@@ -64,5 +77,6 @@ module.exports = {
     validateCreatePost,
     validateLikePost,
     validateUpdatePost,
-    validateDeletePost
+    validateDeletePost,
+    validateGetPostByUserId
 }

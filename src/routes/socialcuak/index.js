@@ -3,10 +3,10 @@ const router = Router();
 
 // middlewares
 const { authorization } = require('../../middlewares/auth.js');
-
 // validators
 const {
     validateGetPostDetails,
+    validateGetPostByUserId,
     validateCreatePost,
     validateLikePost,
     validateUpdatePost,
@@ -35,7 +35,7 @@ router.get('/', async (req, res) => {
 
 router.get('/:id', authorization, validateGetPostDetails, getPostDetails);
 
-router.get('/user/:id', async (req, res) => {
+router.get('/user/:id', validateGetPostByUserId, async (req, res) => {
     try {
         const result = await getPostByUserId(req);
         res.status(200).json(result);
