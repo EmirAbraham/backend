@@ -18,9 +18,9 @@ const pay = (req, res) => {
       },
     ],
     back_urls: {
-      success: "https://backend-production-c946.up.railway.app/payment/feedback",
-      failure: "https://backend-production-c946.up.railway.app/payment/feedback",
-      pending: "https://backend-production-c946.up.railway.app/payment/feedback",
+      success: "https://pf-codecuak.vercel.app/gracias",
+      failure: "https://pf-codecuak.vercel.app/gracias",
+      pending: "https://pf-codecuak.vercel.app/gracias",
     },
     auto_return: "approved",
   };
