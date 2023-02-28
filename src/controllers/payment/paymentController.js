@@ -19,8 +19,8 @@ const pay = (req,res) => {
     ],
     back_urls: {
       success: "http://localhost:5173/gracias",
-      failure: "https://backend-production-c946.up.railway.app/payment/feedback",
-      pending: "https://backend-production-c946.up.railway.app/payment/feedback",
+      failure: "http://localhost:5173/gracias",
+      pending: "http://localhost:5173/gracias",
     },
     auto_return: "approved",
 
