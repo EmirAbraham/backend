@@ -31,7 +31,7 @@ sequelize.models = Object.fromEntries(capsEntries);
 
 // En sequelize.models están todos los modelos importados como propiedades
 // Para relacionarlos hacemos un destructuring
-const { Userdev, Usercom, Socialpost, Socialcomment } = sequelize.models;
+const { Userdev, Usercom, Socialpost, Socialcomment, Cloudinaryimage } = sequelize.models;
 
 // Aca vendrian las relaciones
 Userdev.hasMany(Socialpost);
