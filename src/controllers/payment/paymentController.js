@@ -18,9 +18,9 @@ const pay = (req,res) => {
       },
     ],
     back_urls: {
-      success: "http://localhost:5173/gracias",
-      failure: "http://localhost:5173/gracias",
-      pending: "http://localhost:5173/gracias",
+      success: "https://front-end-six-black.vercel.app/gracias",
+      failure: "https://front-end-six-black.vercel.app/gracias",
+      pending: "https://front-end-six-black.vercel.app/gracias",
     },
     auto_return: "approved",
 
