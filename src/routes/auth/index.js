@@ -56,13 +56,16 @@ router.get('/google/protected', isLoggedIn, (req, res) => {
     }, (error, token) => {
         if (error) throw error;
         
-        res.json({token, user: {
-            id: req.user[0].id, 
-            name: req.user[0].name, 
-            nickName: req.user[0].nickName, 
-            email: req.user[0].email,
-            image: req.user[0].image
-        }});
+        res.redirect(
+        `http://127.0.0.1:5173/social/?user=${JSON.stringify({
+          id: req.user[0].id,
+          name: req.user[0].name,
+          nickName: req.user[0].nickName,
+          email: req.user[0].email,
+          image: req.user[0].image,
+          token: token,
+        })}`
+      );
     });
 });
 
