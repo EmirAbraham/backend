@@ -3,9 +3,12 @@ const { Userdev, Socialpost, Socialcomment } = require('../../../db');
 const getPosts = async (params) => {
     
     const { page } = params;
-
+    console.log(page);
+    let where = {active: true};
     let limit = 10;
     let offset = ((page ? page : 1) - 1) * limit;
+    let url = 'https://backend-production-c946.up.railway.app/socialcuak?';
+    const currentPage = Number(page) || (offset / limit) + 1;
     
     const results = await Socialpost.findAll({
         where: {active: true},
@@ -32,8 +35,12 @@ const getPosts = async (params) => {
             },
         ],
     })
+    const count = await Socialpost.count({where});
+    const pages = Math.ceil( await count / limit );
+    const next = currentPage >= pages ? null : `${url}page=${currentPage+1}`;
+    const previus = currentPage <= 1 ? null : `${url}page=${currentPage-1}`;
 
-    return results;
+    return {count, pages, previus, next, results};
 }
 
 module.exports = { getPosts }
