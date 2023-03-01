@@ -8,7 +8,7 @@ const createComment = async (postId, userId, content) => {
     if (!content) throw new Error(`content is required`);
 
     const user = await Userdev.findByPk(userId, {attributes: ['active', 'name']});
-    const post = await Socialpost.findByPk(postId, {attributes: ['active', 'id']});
+    const post = await Socialpost.findByPk(postId, {attributes: ['active', 'id', 'userdevId']});
 
     if (!user.dataValues.active) throw new Error(`The post's owner ${user.name} is a deleted user`);
     if (!post.dataValues.active) throw new Error(`This post: ${post.id} was deleted`);
@@ -18,13 +18,13 @@ const createComment = async (postId, userId, content) => {
         socialpostId: postId,
         userdevId: userId
     });
-    console.log(post.dataValues.userdevId);
+    
     const postOwner = await Userdev.findByPk(post.dataValues.userdevId, {attributes: ['name', 'email']});
 
     if (postOwner && postOwner.dataValues.email) {
-        // console.log("//////////////");
+        
         const mailOptions = {
-            from: "peraltasantiago21@gmail.com",
+            from: process.env.GMAIL,
             to: postOwner.dataValues.email,
             subject: `¡Nuevo comentario en tu publicación en codeCuak!`,
             html: `<p>¡Hola! ${postOwner.dataValues.name},</p><p>Tienes un nuevo comentario en tu publicación de parte de ${user.name}:</p><p>${content}</p>`
