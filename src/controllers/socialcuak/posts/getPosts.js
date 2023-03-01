@@ -3,7 +3,6 @@ const { Userdev, Socialpost, Socialcomment } = require('../../../db');
 const getPosts = async (params) => {
     
     const { page } = params;
-    console.log(page);
     let where = {active: true};
     let limit = 10;
     let offset = ((page ? page : 1) - 1) * limit;
@@ -11,6 +10,9 @@ const getPosts = async (params) => {
     const currentPage = Number(page) || (offset / limit) + 1;
     
     const results = await Socialpost.findAll({
+        attributes: {
+            exclude: ['userdevId']
+        },
         where: {active: true},
         order: [['createdAt', 'DESC']],
         offset,
@@ -18,20 +20,8 @@ const getPosts = async (params) => {
         include:[
             {
                 model: Userdev,
-                attributes: ['name' , 'image'],
-            },
-            {
-                model: Socialcomment,
-                attributes: ['content', 'likes'],
-                where: {active: true},
-                order: [['likes', 'DESC']],
-                required: false,
-                include: [
-                    {
-                        model: Userdev,
-                        attributes: ['name', 'image'],
-                    }
-                ],
+                attributes: [
+                    'name' , 'image', "id"],
             },
         ],
     })

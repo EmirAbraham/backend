@@ -9,6 +9,7 @@ const hiringcuak = require("./hiringcuak/index.js");
 const socialcuak = require("./socialcuak/index.js");
 const comment = require("./socialcuak/comment.js");
 const payment = require("./payment/index.js");
+const cloudinary = require("./cloudinary/index.js");
 
 const router = Router();
 
@@ -21,5 +22,5 @@ router.use("/payment", payment);
 //router.use('/hiringcuak', hiringcuak);
 router.use("/socialcuak", socialcuak);
 router.use("/socialcuak", comment);
-
+router.use("/cloudinary", cloudinary);
 module.exports = router;
