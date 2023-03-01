@@ -2,8 +2,18 @@ const { Router } = require("express")
 const router = Router()
 const { Socialcomment, Socialpost } = require('../../db'); // Importar modelos
 const { getPosts } = require('../../controllers/socialcuak/posts/index.js');
-const {  createComment, likeComment, deleteComment } = require('../../controllers/socialcuak/comments/index.js');
+const {  createComment, likeComment, deleteComment, getCommentsByPostId } = require('../../controllers/socialcuak/comments/index.js');
 const { authorization } = require('../../middlewares/auth.js')
+
+//RUTA GET DE COMENTARIOS
+router.get('/:id/comments', async (req, res) => {
+  try {
+      const result = await getCommentsByPostId(req);
+      res.status(200).json(result);
+  } catch (error) {
+      res.status(400).send(error.message)
+  }
+});
 
 
 //RUTA POST DE COMENTARIOS
