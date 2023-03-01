@@ -20,6 +20,8 @@
     "express-session": "^1.17.3",
     "express-validator": "^6.15.0",
     "fs": "^0.0.1-security",
+    "google-auth-library": "^8.7.0",
+    "googleapis": "^111.0.0",
     "jsonwebtoken": "^9.0.0",
     "mercadopago": "^1.5.15",
     "morgan": "^1.10.0",
