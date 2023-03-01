@@ -14,6 +14,7 @@ function isLoggedIn(req, res, next) {
 const {
   signUpController,
   logInController,
+  verifyUser,
 } = require("../../controllers/auth/index.js");
 
 // Estrategia Google
@@ -69,6 +70,16 @@ router.get("/google/protected", isLoggedIn, (req, res) => {
       );
     });
 });
+
+router.get('/verify', async (req, res) => {
+  try {
+    const { token, email } = req.query;
+    const verifiedUser = verifyUser(token, email);
+    res.send(200).json(verifiedUser)
+  } catch (error) {
+    res.send(400).json({ error: error.message });
+  }
+})
 
 router.post("/signup", validateSignUp, signUpController);
 
