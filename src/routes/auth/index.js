@@ -25,7 +25,7 @@ router.get("/", (req, res) => {
 
 router.get(
   "/google",
-  passport.authenticate("google", { scope: ["email", "profile"] })
+  passport.authenticate("google", { scope: ["profile", "email"] })
 );
 
 router.get(
@@ -37,7 +37,11 @@ router.get(
 );
 
 router.get("/google/failure", (req, res) => {
-  res.redirect(`https://front-end-six-black.vercel.app/?user=${JSON.stringify("No se pudo autenticar...")}`);
+  res.redirect(
+    `http://127.0.0.1:5173/social/?user=${JSON.stringify(
+      "No se pudo autenticar..."
+    )}`
+  );
 });
 
 router.get("/google/protected", isLoggedIn, (req, res) => {
@@ -58,14 +62,14 @@ router.get("/google/protected", isLoggedIn, (req, res) => {
       if (error) throw error;
 
       res.redirect(
-        `https://front-end-six-black.vercel.app/?user=${JSON.stringify({
+        `http://127.0.0.1:5173/social/?user=${JSON.stringify({
           id: req.user[0].id,
           name: req.user[0].name,
           nickName: req.user[0].nickName,
           email: req.user[0].email,
           image: req.user[0].image,
-        })}/?token=${JSON.stringify({ token })}`
-      );
+          token: token 
+        })}`)
     }
   );
 });
