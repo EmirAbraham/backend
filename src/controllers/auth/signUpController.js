@@ -1,7 +1,7 @@
 // Database
 const { Userdev } = require("../../db");
 
-// bcryptjs para comparar la password ingresada con la de la DB
+// bcryptjs para hashear la password a la DB
 const bcryptjs = require('bcryptjs');
 
 // jwt para tóken de autenticación
