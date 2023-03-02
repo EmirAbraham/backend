@@ -1,23 +1,22 @@
 // DataBase
 const { Userdev } = require("../db.js");
-const { Op } = require("sequelize");
 
 // Express-validator
 const { check } = require("express-validator");
 const { validateResult } = require("../helpers/validateHelper.js");
 
 // Validaciones
-const validateGetUserDetails = [
-  check("id").custom((value) => {
-    return Userdev.findByPk(value, { attributes: ["active"] }).then((user) => {
-      if (!user || !user.dataValues.active) {
-        return Promise.reject("El usuario no existe o fue eliminado");
-      }
-    });
-  }),
-  (req, res, next) => {
-    validateResult(req, res, next);
-  },
+const validateGetUserById = [
+    check("id").custom((value) => {
+        return Userdev.findByPk(value, { attributes: ["active"] }).then((user) => {
+            if (!user || !user.dataValues.active) {
+                return Promise.reject("El usuario no existe o fue eliminado");
+            }
+        });
+    }),
+    (req, res, next) => {
+        validateResult(req, res, next);
+    },
 ];
 
 const validateUpdateUser = [];
@@ -31,8 +30,8 @@ const validateDeleteUser = [
     }
 ];
 
-module.exports = { 
-    validateGetUserDetails, 
+module.exports = {
+    validateGetUserById,
     validateUpdateUser,
     validateDeleteUser
 }
