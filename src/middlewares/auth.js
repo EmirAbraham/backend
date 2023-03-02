@@ -3,6 +3,7 @@ const jwt = require('jsonwebtoken');
 const authorization = (req, res, next) => {
     // Leer token del header
     const token = req.header('x-auth-token');
+    console.log(token);
 
     // Revisar si no hay token
     if (!token) return res.status(401).json({errors: [{msg: "Envíe un tóken"}]});
