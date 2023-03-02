@@ -66,7 +66,7 @@ router.get("/google/protected", isLoggedIn, (req, res) => {
             if (error) throw error;
 
             res.redirect(
-                `http://127.0.0.1:5173/social/?user=${JSON.stringify({
+                `https://front-end-six-black.vercel.app/social/?user=${JSON.stringify({
                     id: req.user[0].id,
                     name: req.user[0].name,
                     nickName: req.user[0].nickName,
