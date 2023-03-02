@@ -10,17 +10,6 @@ const getPostDetails = async (req, res) => {
                 {
                     model: Userdev,
                     attributes: ['name', 'image', 'active']
-                },
-                {
-                    model: Socialcomment,
-                    attributes: ['content', 'likes', 'active', 'createdAt'],
-                    order: [['likes', 'DESC']],
-                    where: {active: true},
-                    required: false,
-                    include: {
-                        model: Userdev,
-                        attributes: ['name', 'image']
-                    },
                 }
             ],
         });

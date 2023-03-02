@@ -4,9 +4,13 @@ const { Socialcomment, Socialpost } = require('../../db'); // Importar modelos
 const { getPosts } = require('../../controllers/socialcuak/posts/index.js');
 const {  createComment, likeComment, deleteComment, getCommentsByPostId } = require('../../controllers/socialcuak/comments/index.js');
 const { authorization } = require('../../middlewares/auth.js')
+const {
+  validateGetCommentsByPostId
+} = require('../../validators/socialcuak.js');
+
 
 //RUTA GET DE COMENTARIOS
-router.get('/:id/comments', async (req, res) => {
+router.get('/:id/comments',validateGetCommentsByPostId, async (req, res) => {
   try {
       const result = await getCommentsByPostId(req);
       res.status(200).json(result);
