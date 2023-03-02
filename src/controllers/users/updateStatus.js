@@ -1,12 +1,12 @@
 const { Userdev } = require('../../db');
 
 const updateStatus = async (id, params, userid) => {
-    const superadmin = await Userdev.findByPk(userid)
+    const superadmin = await Userdev.findByPk(userid);
     if( superadmin.dataValues.status !== 'superadmin'){
         return "Solo los super admins pueden cambiar el estado de los usuarios"
     }
     
-    await Userdev.update({
+    const newAdmin = await Userdev.update({
         status: params.status
     },
     {
@@ -14,7 +14,8 @@ const updateStatus = async (id, params, userid) => {
             id: id
         }
     })
-    return "Status actualizado correctamente"
+    
+    return newAdmin;
 };
 
-module.exports = {updateStatus};
+module.exports = { updateStatus };
