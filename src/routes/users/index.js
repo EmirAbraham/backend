@@ -22,14 +22,7 @@ const {
 } = require('../../controllers/users/index.js');
 
 
-router.get("/", async (req, res) => {
-    try {
-        const result = await getUsers(req.query);
-        res.status(200).json(result);
-    } catch (error) {
-        res.status(400).json({ error: error.message });
-    }
-});
+router.get("/", getUsers);
 
 router.get("/:id", authorization, validateGetUserById, getUserById);
 
