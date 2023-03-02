@@ -31,6 +31,12 @@ router.get("/", async (req, res) => {
     }
 });
 
+router.get("/:id", authorization, validateGetUserById, getUserById);
+
+router.put('/:id', authorization, validateUpdateUser, updateUser);
+
+router.delete('/:id', authorization, validateDeleteUser, deleteUser);
+
 router.get("/admins", async (req, res) => {
     try {
         const result = await getAdmins(req.query);
@@ -39,8 +45,6 @@ router.get("/admins", async (req, res) => {
         res.status(400).json({ error: error.message });
     }
 });
-
-router.get("/:id", authorization, validateGetUserById, getUserById);
 
 router.put('/:id/status',
     authorization,
@@ -53,20 +57,5 @@ router.put('/:id/status',
             res.status(400).json({ error: error.message });
         }
     });
-
-router.put('/:id',
-    authorization,
-    validateUpdateUser,
-    async (req, res) => {
-        try {
-            const { id } = req.params;
-            await updateUser(id, req);
-            res.json("Actualización exitosa");
-        } catch (error) {
-            res.status(400).json({ error: error.message });
-        }
-    });
-
-router.delete('/:id', authorization, validateDeleteUser, deleteUser);
 
 module.exports = router;
