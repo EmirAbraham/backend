@@ -18,7 +18,7 @@ const deleteUser = async (req, res) => {
                 return res.status(404).json({ errors: [{msg: "El usuario no tiene permitido eliminar a este usuario"}]});}
         }
 
-        user.active = false;
+        user.active = !user.active;
         await user.save();
 
         const allPosts = await Socialpost.findAll({
@@ -39,7 +39,11 @@ const deleteUser = async (req, res) => {
             await comment.save();
         }
 
-        return res.status(200).json("Se ha eliminado el usuario y todos sus registros");
+        if (user.dataValues.active) {
+            return res.status(200).json("Se ha recuperado el usuario");
+        } else {
+            return res.status(200).json("Se ha eliminado el usuario y todos sus registros");
+        }
 
     } catch (error) {
         res.status(500).json({ errors: [{msg: error.message}] });
