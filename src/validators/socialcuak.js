@@ -7,18 +7,31 @@ const { check, body } = require('express-validator');
 const { validateResult } = require('../helpers/validateHelper.js');
 
 // Validaciones
-const validateGetPostByUserId = [
+const validateGetCommentsByPostId = [
     check("id").custom((value) => {
-      return Userdev.findByPk(value, { attributes: ["active"] }).then((user) => {
-        if (!user || !user.dataValues.active) {
-          return Promise.reject("El usuario no existe o fue eliminado");
-        }
-      });
+        return Socialpost.findByPk(value, { attributes: ["active"] }).then((post) => {
+            if (!post || !post.dataValues.active) {
+                return Promise.reject("El post no existe o fue eliminado");
+            }
+        });
     }),
     (req, res, next) => {
-      validateResult(req, res, next);
+        validateResult(req, res, next);
     },
-  ];
+];
+
+const validateGetPostByUserId = [
+    check("id").custom((value) => {
+        return Userdev.findByPk(value, { attributes: ["active"] }).then((user) => {
+            if (!user || !user.dataValues.active) {
+                return Promise.reject("El usuario no existe o fue eliminado");
+            }
+        });
+    }),
+    (req, res, next) => {
+        validateResult(req, res, next);
+    },
+];
 
 const validateGetPostDetails = [
     check('id')
@@ -47,7 +60,7 @@ const validateLikePost = [
     (req, res, next) => {
         validateResult(req, res, next);
     }
-]; 
+];
 
 const validateUpdatePost = [
     check('id')
@@ -78,5 +91,6 @@ module.exports = {
     validateLikePost,
     validateUpdatePost,
     validateDeletePost,
-    validateGetPostByUserId
+    validateGetPostByUserId,
+    validateGetCommentsByPostId
 }
