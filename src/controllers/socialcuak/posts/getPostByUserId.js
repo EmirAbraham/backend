@@ -1,7 +1,7 @@
 const { Userdev, Socialpost, Socialcomment } = require('../../../db');
 
 const getPostByUserId = async (req) => {
-    
+
     const { page } = req.query;
     const { id } = req.params
     let where = {
@@ -24,18 +24,6 @@ const getPostByUserId = async (req) => {
                 order: [['createdAt', 'DESC']],
                 required: false,
                 attributes:['id','content','likes','active','createdAt','updatedAt'],
-                include: [
-                    {
-                        model: Socialcomment,
-                        where: {active: true},
-                        required: false,
-                        attributes:['id','content','likes','active','createdAt','updatedAt'],
-                        include: {
-                            model: Userdev,
-                            attributes: ['id', 'name', 'image']
-                        }
-                    }
-                ],        
                 limit,
                 offset
             },
