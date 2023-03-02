@@ -24,12 +24,6 @@ const {
 
 router.get("/", getUsers);
 
-router.get("/:id", authorization, validateGetUserById, getUserById);
-
-router.put('/:id', authorization, validateUpdateUser, updateUser);
-
-router.delete('/:id', authorization, validateDeleteUser, deleteUser);
-
 router.get("/admins", async (req, res) => {
     try {
         const result = await getAdmins(req.query);
@@ -40,15 +34,21 @@ router.get("/admins", async (req, res) => {
 });
 
 router.put('/:id/status',
-    authorization,
-    async (req, res) => {
-        try {
-            const { id } = req.params;
-            const newStatus = await updateStatus(id, req.body, req.user.id);
-            res.status(200).json(newStatus);
-        } catch (error) {
-            res.status(400).json({ error: error.message });
-        }
-    });
+authorization,
+async (req, res) => {
+    try {
+        const { id } = req.params;
+        const newStatus = await updateStatus(id, req.body, req.user.id);
+        res.status(200).json(newStatus);
+    } catch (error) {
+        res.status(400).json({ error: error.message });
+    }
+});
+
+router.get("/:id", authorization, validateGetUserById, getUserById);
+
+router.put('/:id', authorization, validateUpdateUser, updateUser);
+
+router.delete('/:id', authorization, validateDeleteUser, deleteUser);
 
 module.exports = router;
