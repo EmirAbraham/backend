@@ -8,7 +8,7 @@ const {
 } = require('../../validators/cloudinary');
 
 
-router.post("/",validatePublicId, (req, res) => {
+router.post("/", (req, res) => {
   uploadImage(req, res, cloudinary);
 });
 

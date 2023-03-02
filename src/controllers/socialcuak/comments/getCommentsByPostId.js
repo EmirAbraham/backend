@@ -1,9 +1,9 @@
-const { Userdev, Socialpost, Socialcomment } = require('../../../db');
+const { Userdev, Socialcomment } = require('../../../db');
 
 const getCommentsByPostId = async (req) => {
 
     const { page } = req.query;
-    const { id } = req.params
+    const { id } = req.params;
     let where = {
         active: true,
         socialpostId: id
@@ -13,26 +13,16 @@ const getCommentsByPostId = async (req) => {
     let url = `https://backend-production-c946.up.railway.app/socialcuak/${id}/comments?`;
     const currentPage = Number(page) || (offset / limit) + 1;
 
-    const results = await Socialpost.findByPk(id, {
-        attributes: {
-            exclude: ['id', 'content', 'likes', 'active', 'createdAt', 'updatedAt', 'userdev', 'userdevId']
+    const results = await Socialcomment.findAll({
+        where,
+        order: [['createdAt', 'DESC']],
+        attributes: ['id', 'content', 'likes', 'active', 'createdAt', 'updatedAt'],
+        include: {
+            model: Userdev,
+            attributes: ['id', 'name', 'image'],
         },
-        include: [
-            {
-                model: Socialcomment,
-                where: { active: true },
-                order: [['createdAt', 'DESC']],
-                required: false,
-                attributes: ['id', 'content', 'likes', 'active', 'createdAt', 'updatedAt'],
-                include: {
-                    model: Userdev,
-                    attributes: ['id', 'name', 'image'],
-                },
-            },
-        ],
         limit,
         offset,
-        where
     });
     const count = await Socialcomment.count({ where });
     const pages = Math.ceil(await count / limit);
