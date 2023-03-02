@@ -24,14 +24,7 @@ const {
 
 router.get("/", getUsers);
 
-router.get("/admins", async (req, res) => {
-    try {
-        const result = await getAdmins(req.query);
-        res.status(200).json(result);
-    } catch (error) {
-        res.status(400).json({ error: error.message });
-    }
-});
+router.get("/admins", authorization, getAdmins);
 
 router.put('/:id/status', authorization, updateStatus);
 
