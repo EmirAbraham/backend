@@ -44,7 +44,7 @@ const signUpController = async (req, res) => {
                 subject: `¡Verifica tu correo en codeCuak!`,
                 html: `<p>Hola ${name},</p>
                 <p>Para activar tu cuenta de usuario, haz clic en el siguiente enlace:</p>
-                <p><a href="https://localhost:3001/auth/verify?token=${token}&email=${email}">Verificar cuenta de usuario</a></p>`
+                <p><a href="http://localhost:3001/auth/verify?email=${email}">Verificar cuenta de usuario</a></p>`
             };
     
             send_mail(mailOptions);
