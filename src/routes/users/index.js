@@ -33,17 +33,7 @@ router.get("/admins", async (req, res) => {
     }
 });
 
-router.put('/:id/status',
-authorization,
-async (req, res) => {
-    try {
-        const { id } = req.params;
-        const newStatus = await updateStatus(id, req.body, req.user.id);
-        res.status(200).json(newStatus);
-    } catch (error) {
-        res.status(400).json({ error: error.message });
-    }
-});
+router.put('/:id/status', authorization, updateStatus);
 
 router.get("/:id", authorization, validateGetUserById, getUserById);
 
