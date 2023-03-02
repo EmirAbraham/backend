@@ -1,7 +1,7 @@
 const jwt = require('jsonwebtoken');
 
 const authorization = (req, res, next) => {
-    //Leer token del header
+    // Leer token del header
     const token = req.header('x-auth-token');
 
     // Revisar si no hay token
@@ -11,7 +11,7 @@ const authorization = (req, res, next) => {
     try {
         const encryption = jwt.verify(token, process.env.SECRETA);
         req.user = encryption.user;
-        next()
+        next();
     } catch (error) {
         res.status(401).json({errors: [{msg: "Tóken inválido"}]})
     }
