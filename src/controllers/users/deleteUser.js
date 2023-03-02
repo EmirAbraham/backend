@@ -10,8 +10,8 @@ const deleteUser = async (req, res) => {
 
         const user = await Userdev.findByPk(id);
 
-        if (!user || !user.dataValues.active) {
-            return res.status(404).json({ errors: [{msg: "El usuario no existe o ya fue eliminado"}]});
+        if (!user) {
+            return res.status(404).json({ errors: [{msg: "El usuario no existe"}]});
         }
         if (userId !== user.dataValues.id) {
             if(!(admin.dataValues.status === 'admin' || superadmin.dataValues.status === 'superadmin')){
