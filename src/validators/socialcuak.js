@@ -49,6 +49,9 @@ const validateGetPostById = [
 ];
 
 const validateCreatePost = [
+    check('id')
+        .isUUID()
+        .withMessage("El id de publicación debe ser de tipo UUID"),
     check('content', "content es una variable requerida y no debe estar vacía")
         .trim()
         .not()

@@ -7,7 +7,6 @@ const normalizeNickname = (givenName, familyName = false) => {
 
     const currentNickname = `${newGivenName}${newFamilyName ? `_${newFamilyName}` : ""}`;
     const finalNickname = verifyNickname(currentNickname);
-    console.log(finalNickname)
 
     return finalNickname;
 }
