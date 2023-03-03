@@ -3,6 +3,11 @@ const { Userdev } = require("../../db");
 const updateUser = async (req, res) => {
     try {
         const { id } = req.params;
+        
+        if (id !== req.user.id) {
+            return res.status(401).json({ errors: [{msg: "No está permitido editar los datos de otro usuario"}]});
+        }
+
         const { 
             name, 
             birthdate,

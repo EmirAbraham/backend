@@ -3,9 +3,10 @@ const router = Router();
 
 // middlewares
 const { authorization } = require('../../middlewares/auth.js');
+
 // validators
 const {
-    validateGetPostDetails,
+    validateGetPostById,
     validateGetPostByUserId,
     validateCreatePost,
     validateLikePost,
@@ -16,7 +17,7 @@ const {
 // controllers
 const { 
     getPosts, 
-    getPostDetails, 
+    getPostById, 
     createPost,
     likePost, 
     updatePost, 
@@ -24,18 +25,12 @@ const {
     getPostByUserId
 } = require('../../controllers/socialcuak/posts/index.js');
 
-router.get('/', async (req, res) => {
-    try {
-        const result = await getPosts(req.query);
-        res.status(200).json(result);;
-    } catch (error) {
-        res.status(500).send(error.message);
-    }
-})
 
-router.get('/:id', authorization, validateGetPostDetails, getPostDetails);
+router.get('/', getPosts);
 
-router.get('/user/:id', validateGetPostByUserId, async (req, res) => {
+router.get('/:id', authorization, validateGetPostById, getPostById);
+
+router.get('/user/:id', authorization, validateGetPostByUserId, async (req, res) => {
     try {
         const result = await getPostByUserId(req);
         res.status(200).json(result);
