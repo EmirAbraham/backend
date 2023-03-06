@@ -26,7 +26,8 @@ const signUpController = async (req, res) => {
         const payload = {
             user: {
                 id: newUser.id,
-                status: newUser.status
+                status: newUser.status,
+                email: newUser.email
             }
         }
 
