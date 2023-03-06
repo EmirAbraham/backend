@@ -13,7 +13,7 @@ const generateRandomPassword = () => {
     let password = "";
 
     for (let i = 0; i < 40; i++) {
-        const randomIndex = Math.floor(Math.random() * 40);
+        const randomIndex = Math.floor(Math.random() * characters.length);
         password += characters[randomIndex];
     }
 
