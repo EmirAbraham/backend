@@ -5,7 +5,7 @@ const { validateResult } = require("../helpers/validateHelper.js");
 // Validaciones
 const validateGetUserById = [
     check('id')
-        .isUUID()
+        .matches(/^[0-9a-fA-F]{8}\b-[0-9a-fA-F]{4}\b-[0-9a-fA-F]{4}\b-[0-9a-fA-F]{4}\b-[0-9a-fA-F]{12}$/)
         .withMessage("El id del usuario debe ser de tipo UUID"),
     (req, res, next) => {
         validateResult(req, res, next);
@@ -14,7 +14,7 @@ const validateGetUserById = [
 
 const validateUpdateUser = [
     check('id')
-        .isUUID()
+        .matches(/^[0-9a-fA-F]{8}\b-[0-9a-fA-F]{4}\b-[0-9a-fA-F]{4}\b-[0-9a-fA-F]{4}\b-[0-9a-fA-F]{12}$/)
         .withMessage("El id del usuario debe ser de tipo UUID"),
     check('name')
         .optional()
@@ -64,7 +64,7 @@ const validateUpdateUser = [
 
 const validateDeleteUser = [
     check('id')
-        .isUUID()
+        .matches(/^[0-9a-fA-F]{8}\b-[0-9a-fA-F]{4}\b-[0-9a-fA-F]{4}\b-[0-9a-fA-F]{4}\b-[0-9a-fA-F]{12}$/)
         .withMessage("El id del usuario debe ser de tipo UUID"),
     (req, res, next) => {
         validateResult(req, res, next);
