@@ -50,10 +50,10 @@ module.exports = (sequelize) => {
       allowNull: false,
       defaultValue: 'dev'
     },
-    // provider: {
-    //   type: DataTypes.STRING,
-    //   defaultValue: null
-    // }
+    provider: {
+      type: DataTypes.STRING,
+      defaultValue: null
+    },
   },
   {timestamps:false});
 };

@@ -14,7 +14,7 @@ const logInController = async (req, res, next) => {
     try {
         // Verificar si un usuario está registrado o si fue eliminado
         const user = await Userdev.findOne({ where: { email } });
-        // if (user.dataValues.provider === 'google') return res.status(404).json({errors: [{ msg: `Este usuario solo puede acceder con cuenta Google`}]});
+        if (user.dataValues.provider === 'google') return res.status(404).json({errors: [{ msg: `Este usuario solo puede acceder con cuenta Google`}]});
         if (!user) return res.status(404).json({errors: [{ msg: `No se encontró un usuario con el email ${email}`}]});
         if (!user.dataValues.active) return res.status(403).json({errors: [{ msg: `El usuario con el email ${email} fue eliminado`}]});
 
