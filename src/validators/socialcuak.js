@@ -8,7 +8,6 @@ const { validateResult } = require('../helpers/validateHelper.js');
 // Validaciones
 const validateGetCommentsByPostId = [
     check('id')
-        .not()
         .isUUID()
         .withMessage("El id de publicación debe ser de tipo UUID")
         .custom((value) => {
@@ -25,7 +24,6 @@ const validateGetCommentsByPostId = [
 
 const validateGetPostByUserId = [
     check('id')
-        .not()
         .isUUID()
         .withMessage("El id de publicación debe ser de tipo UUID")
         .custom((value) => {
@@ -42,7 +40,6 @@ const validateGetPostByUserId = [
 
 const validateGetPostById = [
     check('id')
-        .not()
         .isUUID()
         .withMessage("El id de publicación debe ser de tipo UUID"),
     (req, res, next) => {
@@ -52,7 +49,6 @@ const validateGetPostById = [
 
 const validateCreatePost = [
     check('id')
-        .not()
         .isUUID()
         .withMessage("El id de publicación debe ser de tipo UUID"),
     check('content', "content es una variable requerida y no debe estar vacía")
@@ -67,7 +63,6 @@ const validateCreatePost = [
 
 const validateLikePost = [
     check('id')
-        .not()
         .isUUID()
         .withMessage("El id de publicación debe ser de tipo UUID"),
     (req, res, next) => {
@@ -77,7 +72,6 @@ const validateLikePost = [
 
 const validateUpdatePost = [
     check('id')
-        .not()
         .isUUID()
         .withMessage("El id de publicación debe ser de tipo UUID"),
     check('content', "content es una variable requerida y no debe estar vacía")
@@ -92,7 +86,6 @@ const validateUpdatePost = [
 
 const validateDeletePost = [
     check('id')
-        .not()
         .isUUID()
         .withMessage("El id de publicación debe ser de tipo UUID"),
     (req, res, next) => {
