@@ -30,7 +30,7 @@ router.get('/', getPosts);
 
 router.get('/:id', authorization, validateGetPostById, getPostById);
 
-router.get('/user/:id', authorization, validateGetPostByUserId, async (req, res) => {
+router.get('/user/:id', validateGetPostByUserId, async (req, res) => {
     try {
         const result = await getPostByUserId(req);
         res.status(200).json(result);
