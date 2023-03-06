@@ -8,34 +8,40 @@ const { validateResult } = require('../helpers/validateHelper.js');
 
 // Validaciones
 const validateGetCommentsByPostId = [
-    check("id").custom((value) => {
-        return Socialpost.findByPk(value, { attributes: ["active"] }).then((post) => {
-            if (!post || !post.dataValues.active) {
-                return Promise.reject("El post no existe o fue eliminado");
-            }
-        });
-    }),
+    check('id')
+        .isUUID()
+        .withMessage("El id de publicación debe ser de tipo UUID")
+        .custom((value) => {
+            return Socialpost.findByPk(value, { attributes: ["active"] }).then((post) => {
+                if (!post || !post.dataValues.active) {
+                    return Promise.reject("El post no existe o fue eliminado");
+                }
+            });
+        }),
     (req, res, next) => {
         validateResult(req, res, next);
     },
 ];
 
 const validateGetPostByUserId = [
-    check("id").custom((value) => {
-        return Userdev.findByPk(value, { attributes: ["active"] }).then((user) => {
-            if (!user || !user.dataValues.active) {
-                return Promise.reject("El usuario no existe o fue eliminado");
-            }
-        });
-    }),
+    check('id')
+        .isUUID()
+        .withMessage("El id de publicación debe ser de tipo UUID")
+        .custom((value) => {
+            return Userdev.findByPk(value, { attributes: ["active"] }).then((user) => {
+                if (!user || !user.dataValues.active) {
+                    return Promise.reject("El usuario no existe o fue eliminado");
+                }
+            });
+        }),
     (req, res, next) => {
         validateResult(req, res, next);
     },
 ];
 
-const validateGetPostDetails = [
+const validateGetPostById = [
     check('id')
-        .matches(/^[0-9a-fA-F]{8}\b-[0-9a-fA-F]{4}\b-[0-9a-fA-F]{4}\b-[0-9a-fA-F]{4}\b-[0-9a-fA-F]{12}$/)
+        .isUUID()
         .withMessage("El id de publicación debe ser de tipo UUID"),
     (req, res, next) => {
         validateResult(req, res, next);
@@ -43,6 +49,9 @@ const validateGetPostDetails = [
 ];
 
 const validateCreatePost = [
+    check('id')
+        .isUUID()
+        .withMessage("El id de publicación debe ser de tipo UUID"),
     check('content', "content es una variable requerida y no debe estar vacía")
         .trim()
         .not()
@@ -55,7 +64,7 @@ const validateCreatePost = [
 
 const validateLikePost = [
     check('id')
-        .matches(/^[0-9a-fA-F]{8}\b-[0-9a-fA-F]{4}\b-[0-9a-fA-F]{4}\b-[0-9a-fA-F]{4}\b-[0-9a-fA-F]{12}$/)
+        .isUUID()
         .withMessage("El id de publicación debe ser de tipo UUID"),
     (req, res, next) => {
         validateResult(req, res, next);
@@ -64,7 +73,7 @@ const validateLikePost = [
 
 const validateUpdatePost = [
     check('id')
-        .matches(/^[0-9a-fA-F]{8}\b-[0-9a-fA-F]{4}\b-[0-9a-fA-F]{4}\b-[0-9a-fA-F]{4}\b-[0-9a-fA-F]{12}$/)
+        .isUUID()
         .withMessage("El id de publicación debe ser de tipo UUID"),
     check('content', "content es una variable requerida y no debe estar vacía")
         .trim()
@@ -78,7 +87,7 @@ const validateUpdatePost = [
 
 const validateDeletePost = [
     check('id')
-        .matches(/^[0-9a-fA-F]{8}\b-[0-9a-fA-F]{4}\b-[0-9a-fA-F]{4}\b-[0-9a-fA-F]{4}\b-[0-9a-fA-F]{12}$/)
+        .isUUID()
         .withMessage("El id de publicación debe ser de tipo UUID"),
     (req, res, next) => {
         validateResult(req, res, next);
@@ -86,7 +95,7 @@ const validateDeletePost = [
 ];
 
 module.exports = {
-    validateGetPostDetails,
+    validateGetPostById,
     validateCreatePost,
     validateLikePost,
     validateUpdatePost,

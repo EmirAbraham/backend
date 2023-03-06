@@ -5,6 +5,7 @@
         "controllers",
         "models",
         "middlewares",
-        "validators"
+        "validators",
+        "helpers"
     ]
 }

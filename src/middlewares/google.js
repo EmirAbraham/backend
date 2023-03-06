@@ -28,7 +28,7 @@ passport.use(
                     nickName: normalizeNickname(profile.given_name, profile.family_name),
                     image: profile.picture,
                     password: generateRandomPassword(),
-                    // provider: profile.provider
+                    provider: profile.provider
                 },
             }).then((user) => done(null, user));
         }
