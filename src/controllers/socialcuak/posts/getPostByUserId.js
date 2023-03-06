@@ -23,7 +23,7 @@ const getPostByUserId = async (req) => {
                 where: {active: true},
                 order: [['createdAt', 'DESC']],
                 required: false,
-                attributes:['id','content','likes','active','createdAt','updatedAt'],
+                attributes:['id','content', 'image', 'likes','active','createdAt','updatedAt'],
                 limit,
                 offset
             },
