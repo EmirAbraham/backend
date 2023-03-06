@@ -27,7 +27,7 @@ const logInController = async (req, res, next) => {
             user: {
                 id: user.id,
                 status: user.status,
-                email: newUser.email
+                email: user.email
             }
         }
 
