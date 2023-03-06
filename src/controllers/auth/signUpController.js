@@ -1,7 +1,7 @@
 // Database
 const { Userdev } = require("../../db");
 
-// bcryptjs para comparar la password ingresada con la de la DB
+// bcryptjs para hashear la password a la DB
 const bcryptjs = require('bcryptjs');
 
 // jwt para tóken de autenticación
@@ -26,7 +26,8 @@ const signUpController = async (req, res) => {
         const payload = {
             user: {
                 id: newUser.id,
-                status: newUser.status
+                status: newUser.status,
+                email: newUser.email
             }
         }
 

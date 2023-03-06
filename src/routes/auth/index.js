@@ -53,6 +53,7 @@ router.get("/google/protected", isLoggedIn, (req, res) => {
         user: {
             id: req.user[0].id,
             status: req.user[0].status,
+            email: req.user[0].email
         },
     };
 

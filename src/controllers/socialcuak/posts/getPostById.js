@@ -1,6 +1,6 @@
 const { Userdev, Socialpost, Socialcomment } = require('../../../db');
 
-const getPostDetails = async (req, res) => {
+const getPostById = async (req, res) => {
     
     try {
         const { id } = req.params;
@@ -29,4 +29,4 @@ const getPostDetails = async (req, res) => {
 }
 
 
-module.exports = { getPostDetails };
+module.exports = { getPostById };

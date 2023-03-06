@@ -3,10 +3,10 @@ const { Userdev } = require("../../db");
 const verifyUser = async (req, res) => {
   
     try {
-        const { email } = req.query;
+        const { email } = req.user;
         const user = await Userdev.findOne({
             where: {
-                email: email,
+                email,
             },
             attributes: {
                 exclude: ['password']

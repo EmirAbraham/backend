@@ -1,9 +1,9 @@
-const { getPosts } = require('./getPosts');
-const { getPostDetails } = require('./getPostDetails');
-const { createPost } = require('./createPost');
-const { likePost } = require('./likePost');
-const { updatePost } = require('./updatePost');
-const { deletePost } = require('./deletePost');
-const { getPostByUserId } = require('./getPostByUserId');
+const { getPosts } = require('./getPosts.js');
+const { getPostById } = require('./getPostById.js');
+const { createPost } = require('./createPost.js');
+const { likePost } = require('./likePost.js');
+const { updatePost } = require('./updatePost.js');
+const { deletePost } = require('./deletePost.js');
+const { getPostByUserId } = require('./getPostByUserId.js');
 
-module.exports = { getPosts, getPostDetails, createPost, likePost, updatePost, deletePost, getPostByUserId }
+module.exports = { getPosts, getPostById, createPost, likePost, updatePost, deletePost, getPostByUserId }
