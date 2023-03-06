@@ -1,11 +1,11 @@
 // Express-validator
-const { check } = require("express-validator");
+const { check, param } = require("express-validator");
 const { validateResult } = require("../helpers/validateHelper.js");
 
 // Validaciones
 const validateGetUserById = [
-    check('id')
-        .matches(/^[0-9a-fA-F]{8}\b-[0-9a-fA-F]{4}\b-[0-9a-fA-F]{4}\b-[0-9a-fA-F]{4}\b-[0-9a-fA-F]{12}$/)
+    param('id')
+        .isUUID()
         .withMessage("El id del usuario debe ser de tipo UUID"),
     (req, res, next) => {
         validateResult(req, res, next);
@@ -13,8 +13,8 @@ const validateGetUserById = [
 ];
 
 const validateUpdateUser = [
-    check('id')
-        .matches(/^[0-9a-fA-F]{8}\b-[0-9a-fA-F]{4}\b-[0-9a-fA-F]{4}\b-[0-9a-fA-F]{4}\b-[0-9a-fA-F]{12}$/)
+    param('id')
+        .isUUID()
         .withMessage("El id del usuario debe ser de tipo UUID"),
     check('name')
         .optional()
@@ -63,8 +63,8 @@ const validateUpdateUser = [
 ];
 
 const validateDeleteUser = [
-    check('id')
-        .matches(/^[0-9a-fA-F]{8}\b-[0-9a-fA-F]{4}\b-[0-9a-fA-F]{4}\b-[0-9a-fA-F]{4}\b-[0-9a-fA-F]{12}$/)
+    param('id')
+        .isUUID()
         .withMessage("El id del usuario debe ser de tipo UUID"),
     (req, res, next) => {
         validateResult(req, res, next);

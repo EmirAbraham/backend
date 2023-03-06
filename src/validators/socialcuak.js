@@ -2,13 +2,13 @@
 const { Userdev, Socialpost } = require('../db.js');
 
 // Express-validator
-const { check, body } = require('express-validator');
+const { check, param } = require('express-validator');
 const { validateResult } = require('../helpers/validateHelper.js');
 
 // Validaciones
 const validateGetCommentsByPostId = [
-    check('id')
-        .matches(/^[0-9a-fA-F]{8}\b-[0-9a-fA-F]{4}\b-[0-9a-fA-F]{4}\b-[0-9a-fA-F]{4}\b-[0-9a-fA-F]{12}$/)
+    param('id')
+        .isUUID()
         .withMessage("El id de publicación debe ser de tipo UUID")
         .custom((value) => {
             return Socialpost.findByPk(value, { attributes: ["active"] }).then((post) => {
@@ -23,8 +23,8 @@ const validateGetCommentsByPostId = [
 ];
 
 const validateGetPostByUserId = [
-    check('id')
-        .matches(/^[0-9a-fA-F]{8}\b-[0-9a-fA-F]{4}\b-[0-9a-fA-F]{4}\b-[0-9a-fA-F]{4}\b-[0-9a-fA-F]{12}$/)
+    param('id')
+        .isUUID()
         .withMessage("El id de publicación debe ser de tipo UUID")
         .custom((value) => {
             return Userdev.findByPk(value, { attributes: ["active"] }).then((user) => {
@@ -39,8 +39,8 @@ const validateGetPostByUserId = [
 ];
 
 const validateGetPostById = [
-    check('id')
-        .matches(/^[0-9a-fA-F]{8}\b-[0-9a-fA-F]{4}\b-[0-9a-fA-F]{4}\b-[0-9a-fA-F]{4}\b-[0-9a-fA-F]{12}$/)
+    param('id')
+        .isUUID()
         .withMessage("El id de publicación debe ser de tipo UUID"),
     (req, res, next) => {
         validateResult(req, res, next);
@@ -48,8 +48,8 @@ const validateGetPostById = [
 ];
 
 const validateCreatePost = [
-    check('id')
-        .matches(/^[0-9a-fA-F]{8}\b-[0-9a-fA-F]{4}\b-[0-9a-fA-F]{4}\b-[0-9a-fA-F]{4}\b-[0-9a-fA-F]{12}$/)
+    param('id')
+        .isUUID()
         .withMessage("El id de publicación debe ser de tipo UUID"),
     check('content', "content es una variable requerida y no debe estar vacía")
         .trim()
@@ -62,8 +62,8 @@ const validateCreatePost = [
 ];
 
 const validateLikePost = [
-    check('id')
-        .matches(/^[0-9a-fA-F]{8}\b-[0-9a-fA-F]{4}\b-[0-9a-fA-F]{4}\b-[0-9a-fA-F]{4}\b-[0-9a-fA-F]{12}$/)
+    param('id')
+        .isUUID()
         .withMessage("El id de publicación debe ser de tipo UUID"),
     (req, res, next) => {
         validateResult(req, res, next);
@@ -71,8 +71,8 @@ const validateLikePost = [
 ];
 
 const validateUpdatePost = [
-    check('id')
-        .matches(/^[0-9a-fA-F]{8}\b-[0-9a-fA-F]{4}\b-[0-9a-fA-F]{4}\b-[0-9a-fA-F]{4}\b-[0-9a-fA-F]{12}$/)
+    param('id')
+        .isUUID()
         .withMessage("El id de publicación debe ser de tipo UUID"),
     check('content', "content es una variable requerida y no debe estar vacía")
         .trim()
@@ -85,8 +85,8 @@ const validateUpdatePost = [
 ];
 
 const validateDeletePost = [
-    check('id')
-        .matches(/^[0-9a-fA-F]{8}\b-[0-9a-fA-F]{4}\b-[0-9a-fA-F]{4}\b-[0-9a-fA-F]{4}\b-[0-9a-fA-F]{12}$/)
+    param('id')
+        .isUUID()
         .withMessage("El id de publicación debe ser de tipo UUID"),
     (req, res, next) => {
         validateResult(req, res, next);
