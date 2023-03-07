@@ -4,26 +4,26 @@ const { validateResult } = require("../helpers/validateHelper.js");
 
 //Validaciones
 const validateGetUserById = [
-  param('id')
-    .custom((value) => {
-      if (!validator.isUUID(value)) {
-        throw new Error('El id del usuario debe ser de tipo UUID');
-      }
-      return true;
-    }),
+  // param('id')
+  //   .custom((value) => {
+  //     if (!validator.isUUID(value)) {
+  //       throw new Error('El id del usuario debe ser de tipo UUID');
+  //     }
+  //     return true;
+  //   }),
   (req, res, next) => {
     validateResult(req, res, next);
   }
 ];
 
 const validateUpdateUser = [
-  param('id')
-    .custom((value) => {
-      if (!validator.isUUID(value)) {
-        throw new Error('El id del usuario debe ser de tipo UUID');
-      }
-      return true;
-    }),
+  // param('id')
+  //   .custom((value) => {
+  //     if (!validator.isUUID(value)) {
+  //       throw new Error('El id del usuario debe ser de tipo UUID');
+  //     }
+  //     return true;
+  //   }),
   check('name')
     .optional()
     .trim()
@@ -88,13 +88,13 @@ const validateUpdateUser = [
 ];
 
 const validateDeleteUser = [
-  param('id')
-    .custom((value) => {
-      if (!validator.isUUID(value)) {
-        throw new Error('El id del usuario debe ser de tipo UUID');
-      }
-      return true;
-    }),
+  // param('id')
+  //   .custom((value) => {
+  //     if (!validator.isUUID(value)) {
+  //       throw new Error('El id del usuario debe ser de tipo UUID');
+  //     }
+  //     return true;
+  //   }),
   (req, res, next) => {
     validateResult(req, res, next);
   }
