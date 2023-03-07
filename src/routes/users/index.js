@@ -28,10 +28,10 @@ router.get("/admins", authorization, getAdmins);
 
 router.put('/:id/status', authorization, updateStatus);
 
-router.get("/:id", authorization, validateGetUserById, getUserById);
+router.get("/:id", authorization, getUserById);
 
 router.put('/:id', authorization, validateUpdateUser, updateUser);
 
-router.delete('/:id', authorization, validateDeleteUser, deleteUser);
+router.delete('/:id', authorization, deleteUser);
 
 module.exports = router;

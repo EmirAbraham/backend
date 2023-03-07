@@ -28,9 +28,9 @@ const {
 
 router.get('/', getPosts);
 
-router.get('/:id', authorization, validateGetPostById, getPostById);
+router.get('/:id', authorization, getPostById);
 
-router.get('/user/:id', validateGetPostByUserId, async (req, res) => {
+router.get('/user/:id', async (req, res) => {
     try {
         const result = await getPostByUserId(req);
         res.status(200).json(result);
@@ -41,10 +41,10 @@ router.get('/user/:id', validateGetPostByUserId, async (req, res) => {
 
 router.post('/', authorization, validateCreatePost, createPost);
 
-router.post('/:id/like', authorization, validateLikePost, likePost);
+router.post('/:id/like', authorization, likePost);
 
 router.put('/:id', authorization, validateUpdatePost, updatePost);
 
-router.delete('/:id', authorization, validateDeletePost, deletePost);
+router.delete('/:id', authorization, deletePost);
 
 module.exports = router;
