@@ -25,7 +25,8 @@ passport.use(
                 },
                 defaults: {
                     name: profile.displayName,
-                    nickName: normalizeNickname(profile.given_name, profile.family_name),
+                    // nickName: normalizeNickname(profile.given_name, profile.family_name),
+                    nickName: `${profile.given_name}_${profile.family_name}`,
                     image: profile.picture,
                     password: generateRandomPassword(),
                     provider: profile.provider
