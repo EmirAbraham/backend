@@ -6,7 +6,12 @@ const { validateResult } = require("../helpers/validateHelper.js");
 const validateGetUserById = [
     param('id')
         /* .isUUID() */
-        .withMessage("El id del usuario debe ser de tipo UUID"),
+        .custom((value) => {
+            if (!validator.isUUID(value)) {
+              throw new Error('El id del usuario debe ser de tipo UUID');
+            }
+            return true;
+        }),
     (req, res, next) => {
         validateResult(req, res, next);
     }
@@ -15,7 +20,12 @@ const validateGetUserById = [
 const validateUpdateUser = [
     param('id')
         /* .isUUID() */
-        .withMessage("El id del usuario debe ser de tipo UUID"),
+        .custom((value) => {
+            if (!validator.isUUID(value)) {
+              throw new Error('El id del usuario debe ser de tipo UUID');
+            }
+            return true;
+          }),
     check('name')
         .optional()
         .trim()
