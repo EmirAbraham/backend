@@ -14,7 +14,8 @@ const updateUser = async (req, res) => {
             image, 
             description,
             about,
-            skills, 
+            skills,
+            github, 
         } = req.body;
 
         const user = await Userdev.update(
@@ -25,6 +26,7 @@ const updateUser = async (req, res) => {
                 description,
                 about,
                 skills,
+                github,
             },
             {
                 where: {

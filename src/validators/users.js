@@ -57,6 +57,10 @@ const validateUpdateUser = [
             }
             return true;
         }),
+    check('github')
+        .optional()
+        .isURL()
+        .withMessage("github debe ser un formato valido de URL"),   
     (req, res, next) => {
         validateResult(req, res, next);
     }
