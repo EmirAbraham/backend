@@ -514,10 +514,16 @@ const getMailNewComment = (name, comentador, contenido) => {
                                                                             Hola ${name}!<br><br></p>
                                                                         <p
                                                                             style="Margin:0;-webkit-text-size-adjust:none;-ms-text-size-adjust:none;mso-line-height-rule:exactly;font-family:arial, 'helvetica neue', helvetica, sans-serif;line-height:27px;color:#333333;font-size:18px">
-                                                                            ${comentador} ha comentado tu publicación:
-
+                                                                            
+                                                                            Felicitaciones developer, !ya tienes un amigo!
+                                                                            <br><br>
+                                                                            Queríamos hacerte saber que ${comentador} ha dejado un comentario en tu publicación:
                                                                             <br><br>
                                                                             "${contenido}"
+                                                                            <br><br>        
+                                                                            Gracias por ser parte de nuestra comunidad y sigue haciendo publicaciones increíbles.
+                                                                            <br><br>
+                                                                            ¡Cuack, cuack de parte de codeCuak!
                                                                         </p>
                                                                     </td>
                                                                 </tr>
