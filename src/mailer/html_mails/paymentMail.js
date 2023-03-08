@@ -514,13 +514,13 @@ const getMailPayment = (name, mount) => {
                                                                         Hola ${name}!<br><br></p>
                                                                     <p
                                                                         style="Margin:0;-webkit-text-size-adjust:none;-ms-text-size-adjust:none;mso-line-height-rule:exactly;font-family:arial, 'helvetica neue', helvetica, sans-serif;line-height:27px;color:#333333;font-size:18px">
-                                                                        ¡Quack, quack! Soy Patito, la mascota de la página web y quiero expresar mi más sincero agradecimiento por tu generosa donación. ¡Estamos extremadamente agradecidos por tu apoyo a nuestra comunidad de patos y por ayudarnos a seguir adelante!
+                                                                        Queremos expresar nuestro más sincero agradecimiento por tu generosa donación. ¡Estamos extremadamente agradecidos por tu apoyo a nuestra comunidad de patos y por ayudarnos a seguir adelante!
                                                                         <br><br>        
                                                                         Tu donación nos ayuda a mantener nuestro sitio web en funcionamiento y nos permite seguir brindando contenido y recursos de alta calidad para todos los patos que visitan nuestra página. Gracias a ti, podemos continuar trabajando en nuestra misión de crear un mundo mejor para todos los patos.
                                                                         <br><br>
                                                                         Queríamos que supieras que tu donación es realmente apreciada y que estamos muy agradecidos por tu amabilidad y generosidad. ¡Es gracias a personas como tú que podemos seguir haciendo lo que amamos!
                                                                         <br><br>
-                                                                        ¡Quack, quack, quack! De nuevo, muchas gracias por tu donación.
+                                                                        ¡Cuack, cuack, cuack! De nuevo, muchas gracias por tu donación.
                                                                         <br><br>
                                                                         ¡Sigue nadando y graznando fuerte!
                                                                         <br><br>
