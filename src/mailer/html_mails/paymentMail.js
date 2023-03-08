@@ -1,4 +1,4 @@
-const getMailNewComment = (name, comentador, contenido) => {
+const getMailPayment = (name, mount) => {
     return (`<!DOCTYPE html
     PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
     <html xmlns="http://www.w3.org/1999/xhtml" xmlns:o="urn:schemas-microsoft-com:office:office"
@@ -503,28 +503,35 @@ const getMailNewComment = (name, comentador, contenido) => {
                                                                         style="padding:0;Margin:0;padding-left:40px;padding-right:40px">
                                                                         <h1
                                                                             style="Margin:0;line-height:60px;mso-line-height-rule:exactly;font-family:Montserrat, sans-serif;font-size:50px;font-style:normal;font-weight:bold;color:#9cc199">
-                                                                            <b>¡</b>&nbsp;Tienes un nuevo comentario!</h1>
+                                                                            <b>¡</b>&nbsp;Gracias por tu donación!</h1>
                                                                     </td>
                                                                 </tr>
                                                                 <tr>
                                                                     <td align="left"
-                                                                        style="padding:0;Margin:0;padding-bottom:10px;padding-top:20px">
-                                                                        <p
-                                                                            style="Margin:0;-webkit-text-size-adjust:none;-ms-text-size-adjust:none;mso-line-height-rule:exactly;font-family:arial, 'helvetica neue', helvetica, sans-serif;line-height:27px;color:#333333;font-size:18px">
-                                                                            Hola ${name}!<br><br></p>
-                                                                        <p
-                                                                            style="Margin:0;-webkit-text-size-adjust:none;-ms-text-size-adjust:none;mso-line-height-rule:exactly;font-family:arial, 'helvetica neue', helvetica, sans-serif;line-height:27px;color:#333333;font-size:18px">
-                                                                            
-                                                                            Felicitaciones developer, !ya tienes un amigo!
-                                                                            <br><br>
-                                                                            Queríamos hacerte saber que ${comentador} ha dejado un comentario en tu publicación:
-                                                                            <br><br>
-                                                                            "${contenido}"
-                                                                            <br><br>        
-                                                                            Gracias por ser parte de nuestra comunidad y sigue haciendo publicaciones increíbles.
-                                                                            <br><br>
-                                                                            ¡Cuack, cuack de parte de codeCuak!
-                                                                        </p>
+                                                                    style="padding:0;Margin:0;padding-bottom:10px;padding-top:20px">
+                                                                    <p
+                                                                        style="Margin:0;-webkit-text-size-adjust:none;-ms-text-size-adjust:none;mso-line-height-rule:exactly;font-family:arial, 'helvetica neue', helvetica, sans-serif;line-height:27px;color:#333333;font-size:18px">
+                                                                        Hola ${name}!<br><br></p>
+                                                                    <p
+                                                                        style="Margin:0;-webkit-text-size-adjust:none;-ms-text-size-adjust:none;mso-line-height-rule:exactly;font-family:arial, 'helvetica neue', helvetica, sans-serif;line-height:27px;color:#333333;font-size:18px">
+                                                                        Queremos expresar nuestro más sincero agradecimiento por tu generosa donación. ¡Estamos extremadamente agradecidos por tu apoyo a nuestra comunidad de patos y por ayudarnos a seguir adelante!
+                                                                        <br><br>        
+                                                                        Tu donación nos ayuda a mantener nuestro sitio web en funcionamiento y nos permite seguir brindando contenido y recursos de alta calidad para todos los patos que visitan nuestra página. Gracias a ti, podemos continuar trabajando en nuestra misión de crear un mundo mejor para todos los patos.
+                                                                        <br><br>
+                                                                        Queríamos que supieras que tu donación es realmente apreciada y que estamos muy agradecidos por tu amabilidad y generosidad. ¡Es gracias a personas como tú que podemos seguir haciendo lo que amamos!
+                                                                        <br><br>
+                                                                        ¡Cuack, cuack, cuack! De nuevo, muchas gracias por tu donación.
+                                                                        <br><br>
+                                                                        ¡Sigue nadando y graznando fuerte!
+                                                                        <br><br>
+                                                                        Con mucho cariño,
+                                                                        <br><br>
+                                                                        CodeCuak
+
+                                                                        <br><br>
+                                                                        Monto de la donación:
+                                                                        <b>$${mount}</b>
+                                                                    </p>
                                                                     </td>
                                                                 </tr>
                                                             </table>
@@ -660,4 +667,4 @@ const getMailNewComment = (name, comentador, contenido) => {
     `)
 }
 
-module.exports = { getMailNewComment }
+module.exports = { getMailPayment }
