@@ -1,4 +1,4 @@
-const getMailWelcome = (name) => {
+const getMailNewComment = (name, comentador, contenido) => {
     return (`<!DOCTYPE html
     PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
     <html xmlns="http://www.w3.org/1999/xhtml" xmlns:o="urn:schemas-microsoft-com:office:office"
@@ -503,7 +503,7 @@ const getMailWelcome = (name) => {
                                                                         style="padding:0;Margin:0;padding-left:40px;padding-right:40px">
                                                                         <h1
                                                                             style="Margin:0;line-height:60px;mso-line-height-rule:exactly;font-family:Montserrat, sans-serif;font-size:50px;font-style:normal;font-weight:bold;color:#9cc199">
-                                                                            <b>¡</b>&nbsp;Bienvenid@ a SocialCuak!</h1>
+                                                                            <b>¡</b>&nbsp;Tienes un nuevo comentario!</h1>
                                                                     </td>
                                                                 </tr>
                                                                 <tr>
@@ -511,15 +511,13 @@ const getMailWelcome = (name) => {
                                                                         style="padding:0;Margin:0;padding-bottom:10px;padding-top:20px">
                                                                         <p
                                                                             style="Margin:0;-webkit-text-size-adjust:none;-ms-text-size-adjust:none;mso-line-height-rule:exactly;font-family:arial, 'helvetica neue', helvetica, sans-serif;line-height:27px;color:#333333;font-size:18px">
-                                                                            Hola ${name}!
-                                                                            <br><br>
-                                                                        </p>
+                                                                            Hola ${name}!<br><br></p>
                                                                         <p
                                                                             style="Margin:0;-webkit-text-size-adjust:none;-ms-text-size-adjust:none;mso-line-height-rule:exactly;font-family:arial, 'helvetica neue', helvetica, sans-serif;line-height:27px;color:#333333;font-size:18px">
-                                                                            Estamos emocionados de tenerte como parte de nuestra comunidad dedicada a la programación y todo lo relacionado con ella. 
-                                                                            Aquí podrás conectarte con otros profesionales, compartir sus experiencias, aprender de otros y tener acceso a recursos y oportunidades únicas.
+                                                                            ${comentador} ha comentado tu publicación:
+
                                                                             <br><br>
-                                                                            SocialCuak, la red social por y para programadores.
+                                                                            "${contenido}"
                                                                         </p>
                                                                     </td>
                                                                 </tr>
@@ -656,4 +654,4 @@ const getMailWelcome = (name) => {
     `)
 }
 
-module.exports = { getMailWelcome }
+module.exports = { getMailNewComment }
