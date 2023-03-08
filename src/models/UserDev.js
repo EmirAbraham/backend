@@ -39,6 +39,10 @@ module.exports = (sequelize) => {
     description: {
       type: DataTypes.STRING(120)
     },
+    github: {
+      type: DataTypes.STRING,
+      defaultValue: null
+    },
     about: {
       type: DataTypes.STRING(1500)
     },
