@@ -4,20 +4,19 @@ const passport = require("passport");
 const jwt = require("jsonwebtoken");
 
 // validators
-const { 
-    validateSignUp, 
-    validateLogIn 
+const {
+    validateSignUp,
+    validateLogIn
 } = require("../../validators/auth.js");
 
 function isLoggedIn(req, res, next) {
-  req.user ? next() : res.sendStatus(401);
+    req.user ? next() : res.sendStatus(401);
 }
 
 // controllers
 const {
-  signUpController,
-  logInController,
-  verifyUser,
+    signUpController,
+    logInController
 } = require("../../controllers/auth/index.js");
 
 // middlewares
@@ -81,8 +80,6 @@ router.get("/google/protected", isLoggedIn, (req, res) => {
 });
 
 router.post("/signup", validateSignUp, signUpController);
-
-router.put("/verify", authorization, verifyUser);
 
 router.post("/login", validateLogIn, logInController);
 
