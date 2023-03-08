@@ -7,6 +7,10 @@ const bcryptjs = require('bcryptjs');
 // jwt para tóken de autenticación
 const jwt = require('jsonwebtoken');
 
+// Enviador de emails
+const { send_mail } = require('../../mailer/send.js');
+const { getMailWelcome } = require('../../mailer/html_mails/welcome.js');
+
 const signUpController = async (req, res) => {
 
     try {
@@ -29,6 +33,16 @@ const signUpController = async (req, res) => {
             }
         }
 
+        // Eniar el mail de bienvenida
+        const html = getMailWelcome(name);
+        const mailOptions = {
+            from: process.env.GMAIL,
+            to: email,
+            subject: `¡Welcome to CodeCuak!`,
+            html,
+        };
+        await send_mail(mailOptions);
+
         // Firmar el JWT
         jwt.sign(payload, process.env.SECRETA, {
             expiresIn: 172800 // vence en 2 días
@@ -37,7 +51,6 @@ const signUpController = async (req, res) => {
 
             res.json({token, user: {id: newUser.dataValues.id, name, nickName, email}});
         });
-
 
     } catch (error) {
         res.status(500).send({errors: [{msg: error.message}]});
