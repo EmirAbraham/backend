@@ -22,7 +22,7 @@ const deleteUser = async (req, res) => {
         await user.save();
 
         const allPosts = await Socialpost.findAll({
-            where: {userdevId: user}
+            where: {userdevId: id}
         });
         
         for (const post of allPosts) {
@@ -31,7 +31,7 @@ const deleteUser = async (req, res) => {
         }
 
         const allComments = await Socialcomment.findAll({
-            where: {userdevId: user}
+            where: {userdevId: id}
         });
         
         for (const comment of allComments) {
